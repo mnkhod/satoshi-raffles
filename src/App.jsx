@@ -93,7 +93,7 @@ function App() {
             thousands to the Ordinals Ecosystem. He is a treasured artefact
             inscribed into a treasured sat.
           </p>
-          <div className="w-full h-2"></div>
+          <div className="w-full h-0.5 bg-gray-300"></div>
           <div className="grid grid-cols-2">
             <div>
               <p>Price per ticket</p>
@@ -104,7 +104,7 @@ function App() {
               <h2>473</h2>
             </div>
           </div>
-          <div className="w-full h-2"></div>
+          <div className="w-full h-0.5 bg-gray-300"></div>
           <div className="grid grid-cols-2">
             <div>
               <p>Raffle ends in:</p>
