@@ -32,13 +32,13 @@ function App() {
   }
 
   return (
-    <div className="px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
-      <div className="grid grid-cols-3 gap-[24px]">
-        <div className="border border-2">
+    <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+        <div className="order-2 md:order-1 border border-2">
           <button>View Inscription</button>
         </div>
 
-        <div className="flex flex-col gap-3 col-span-2">
+        <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
           <h1 className="text-[48px]">Satoshi Pit Beta</h1>
           <p>
             A place to partake in the raffles of unique and abstract Ordinal
@@ -60,7 +60,7 @@ function App() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-[24px]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
 
         <div className="flex flex-col border-4">
           <div className="p-[24px] border border-b-2 border-x-0 border-y-0">
