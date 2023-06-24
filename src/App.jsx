@@ -79,7 +79,7 @@ function App() {
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="order-2 md:order-1 border border-2">
+        <div className="rounded-lg order-2 md:order-1 border border-2">
           <button>View Inscription</button>
         </div>
 
@@ -106,7 +106,7 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="flex flex-col border-4">
+        <div className="rounded-lg flex flex-col border-4">
           <div className="p-[24px] border border-b-2 border-x-0 border-y-0">
             <h1 className="text-[18px] font-semibold">Inscription Details</h1>
           </div>
@@ -130,7 +130,7 @@ function App() {
           </ul>
         </div>
 
-        <div className="p-[24px] flex flex-col border-4 gap-[24px]">
+        <div className="rounded-lg p-[24px] flex flex-col border-4 gap-[24px]">
           <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
           <p>
             The king of $OXBT, the BitGod21 Annon onboarded masses in their
@@ -163,7 +163,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-[24px] p-[24px] border-4">
+        <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border-4">
           <h1 className="text-[28px]">Leaderboard</h1>
           <div className="flex">
             <input
