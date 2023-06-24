@@ -146,17 +146,23 @@ function App() {
                 <h5>Wallet</h5>
                 <h5>Tickets</h5>
               </li>
-              {tokens.length > 0 &&
-                tokens.map((token, key) => (
-                  <li className="p-[24px] flex justify-between">
-                    <h5>
-                      {token.from.substring(0, 4) +
-                        "..." +
-                        token.from.substring(token.from.length - 4)}
-                    </h5>
-                    <p>{token.ticket}</p>
-                  </li>
-                ))}
+              <div className="max-h-40 overflow-y-auto">
+                {tokens.length > 0 &&
+                  tokens.map((token, key) => (
+                    <li className="p-[24px] flex justify-between">
+                      <a
+                        onClick={() =>
+                          navigator.clipboard.writeText(token.from)
+                        }
+                      >
+                        {token.from.substring(0, 4) +
+                          "..." +
+                          token.from.substring(token.from.length - 4)}
+                      </a>
+                      <p>{token.ticket}</p>
+                    </li>
+                  ))}
+              </div>
             </ul>
           </div>
         </div>
