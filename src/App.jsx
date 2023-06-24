@@ -151,6 +151,7 @@ function App() {
                   tokens.map((token, key) => (
                     <li className="p-[24px] flex justify-between">
                       <a
+                        className="cursor-pointer"
                         onClick={() =>
                           navigator.clipboard.writeText(token.from)
                         }
