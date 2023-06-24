@@ -5,6 +5,9 @@ import axios from "axios";
 function App() {
   const [tokens, setTokens] = useState([]);
   const [copiedIndex, setCopiedIndex] = useState(-1);
+  const [searchWallet, setSearchWallet] = useState("");
+
+  const [state, setState] = useState([]);
 
   useEffect(() => {
     getAddressDetail();
@@ -57,6 +60,20 @@ function App() {
     setTimeout(() => {
       setCopiedIndex(-1);
     }, 3000);
+  };
+
+  function handleChange(e) {
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
+
+  const handleSearch = () => {
+    setSearchWallet(state.searchWallet);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -149,8 +166,14 @@ function App() {
         <div className="flex flex-col gap-[24px] p-[24px] border-4">
           <h1 className="text-[28px]">Leaderboard</h1>
           <div className="flex">
-            <input type="text" className="grow border-2" />
-            <button>Search</button>
+            <input
+              type="text"
+              name="searchWallet"
+              className="grow border-2"
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+            />
+            <button onClick={handleSearch}>Search</button>
           </div>
           <div>
             <ul className="border border-4">
@@ -158,41 +181,47 @@ function App() {
                 <h5>Wallet</h5>
                 <h5>Tickets</h5>
               </li>
-              <div className="max-h-40 overflow-y-auto">
+              <div className="h-40 max-h-40 overflow-y-auto">
                 {tokens.length > 0 &&
-                  tokens.map((token, key) => (
-                    <li className="p-[24px] flex justify-between" key={key}>
-                      <a
-                        className="cursor-pointer"
-                        onClick={() => handleClick(token.from, key)}
-                      >
-                        {token.from.substring(0, 4) +
-                          "..." +
-                          token.from.substring(token.from.length - 4)}
-                      </a>
-                      <p>{token.ticket}</p>
-                      {copiedIndex === key && (
-                        <div className="absolute top-2 right-2">
-                          <div className="alert alert-success">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="stroke-current shrink-0 h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <span>Address Copied!</span>
+                  tokens
+                    .filter((token) =>
+                      token.from
+                        .toLowerCase()
+                        .includes(searchWallet.toLowerCase())
+                    )
+                    .map((token, key) => (
+                      <li className="p-[24px] flex justify-between" key={key}>
+                        <a
+                          className="cursor-pointer"
+                          onClick={() => handleClick(token.from, key)}
+                        >
+                          {token.from.substring(0, 4) +
+                            "..." +
+                            token.from.substring(token.from.length - 4)}
+                        </a>
+                        <p>{token.ticket}</p>
+                        {copiedIndex === key && (
+                          <div className="absolute top-2 right-2">
+                            <div className="alert alert-success">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="stroke-current shrink-0 h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span>Address Copied!</span>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </li>
-                  ))}
+                        )}
+                      </li>
+                    ))}
               </div>
             </ul>
           </div>
