@@ -128,7 +128,10 @@ function App() {
             </div>
             <div>
               <p>Tickets purchased</p>
-              <h2>473</h2>
+              <h2>
+                {tokens.length > 0 &&
+                  tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)}
+              </h2>
             </div>
           </div>
           <div className="w-full h-0.5 bg-gray-300"></div>
