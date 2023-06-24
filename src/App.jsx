@@ -6,6 +6,7 @@ function App() {
   const [tokens, setTokens] = useState([]);
   const [copiedIndex, setCopiedIndex] = useState(-1);
   const [searchWallet, setSearchWallet] = useState("");
+  const [buyPanelOpen, setBuyPanelOpen] = useState(false);
 
   const [state, setState] = useState([]);
 
@@ -76,6 +77,10 @@ function App() {
     }
   };
 
+  const handleBuyButton = () => {
+    setBuyPanelOpen(!buyPanelOpen);
+  };
+
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
@@ -142,39 +147,91 @@ function App() {
             </li>
           </ul>
         </div>
-
-        <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
-          <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
-          <p>
-            The king of $OXBT, the BitGod21 Annon onboarded masses in their
-            thousands to the Ordinals Ecosystem. He is a treasured artefact
-            inscribed into a treasured sat.
-          </p>
-          <div className="w-full h-0.5 bg-gray-300"></div>
-          <div className="grid grid-cols-2">
-            <div>
-              <p>Price per ticket</p>
-              <h2>100 OXBT</h2>
+        {buyPanelOpen ? (
+          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
+            <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
+            <div className="w-full h-0.5 bg-gray-300"></div>
+            <div className="grid grid-cols-2">
+              <div>
+                <p>Price per ticket</p>
+                <h2>100 OXBT</h2>
+              </div>
+              <div>
+                <p>Select amount</p>
+                <h2>1-1000</h2>
+              </div>
+              <div>
+                <input type="numeric" onChange={handleChange}></input>
+              </div>
+              <div>
+                <p>Deposit Address</p>
+                <textarea
+                  className="w-full h-24"
+                  value={
+                    "bc1p0kh6z4fdakldgjladfnmglvkfjddfasdfsdfgs564blkfg0masdlfh"
+                  }
+                ></textarea>
+              </div>
+              <div>
+                <p>Total cost</p>
+                <h2>100 OXBT</h2>
+              </div>
             </div>
-            <div>
-              <p>Tickets purchased</p>
-              <h2>
-                {tokens.length > 0 &&
-                  tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)}
-              </h2>
+            <div className="w-full h-0.5 bg-gray-300"></div>
+            <div className="grid grid-cols-2">
+              <div>
+                <p>
+                  Deposit the amount shown in “Total cost” to the deposit
+                  address to enter the draw. Please note this deposit is
+                  NON-REFUNDABLE. For a more in-depth guide, read here
+                </p>
+              </div>
+              <div>
+                <p>
+                  Once the TX is confirmed, close this window, paste your
+                  deposit wallet into the search bar and your total tickets will
+                  be shown for the draw.
+                </p>
+              </div>
+              <div>
+                <button onClick={handleBuyButton}>Close</button>
+              </div>
             </div>
           </div>
-          <div className="w-full h-0.5 bg-gray-300"></div>
-          <div className="grid grid-cols-2">
-            <div>
-              <p>Raffle ends in:</p>
-              <h4>25H : 34M : 37S</h4>
+        ) : (
+          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
+            <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
+            <p>
+              The king of $OXBT, the BitGod21 Annon onboarded masses in their
+              thousands to the Ordinals Ecosystem. He is a treasured artefact
+              inscribed into a treasured sat.
+            </p>
+            <div className="w-full h-0.5 bg-gray-300"></div>
+            <div className="grid grid-cols-2">
+              <div>
+                <p>Price per ticket</p>
+                <h2>100 OXBT</h2>
+              </div>
+              <div>
+                <p>Tickets purchased</p>
+                <h2>
+                  {tokens.length > 0 &&
+                    tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)}
+                </h2>
+              </div>
             </div>
-            <div>
-              <button>Buy tickets</button>
+            <div className="w-full h-0.5 bg-gray-300"></div>
+            <div className="grid grid-cols-2">
+              <div>
+                <p>Raffle ends in:</p>
+                <h4>25H : 34M : 37S</h4>
+              </div>
+              <div>
+                <button onClick={handleBuyButton}>Buy tickets</button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border">
           <h1 className="text-[28px]">Leaderboard</h1>
