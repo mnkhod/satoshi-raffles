@@ -4,6 +4,7 @@ import axios from "axios";
 
 function App() {
   const [tokens, setTokens] = useState([]);
+  const [copiedIndex, setCopiedIndex] = useState(-1);
 
   useEffect(() => {
     getAddressDetail();
@@ -49,6 +50,14 @@ function App() {
       console.log(e);
     }
   }
+
+  const handleClick = (address, index) => {
+    navigator.clipboard.writeText(address);
+    setCopiedIndex(index);
+    setTimeout(() => {
+      setCopiedIndex(-1);
+    }, 3000);
+  };
 
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
@@ -149,18 +158,36 @@ function App() {
               <div className="max-h-40 overflow-y-auto">
                 {tokens.length > 0 &&
                   tokens.map((token, key) => (
-                    <li className="p-[24px] flex justify-between">
+                    <li className="p-[24px] flex justify-between" key={key}>
                       <a
                         className="cursor-pointer"
-                        onClick={() =>
-                          navigator.clipboard.writeText(token.from)
-                        }
+                        onClick={() => handleClick(token.from, key)}
                       >
                         {token.from.substring(0, 4) +
                           "..." +
                           token.from.substring(token.from.length - 4)}
                       </a>
                       <p>{token.ticket}</p>
+                      {copiedIndex === key && (
+                        <div className="absolute top-2 right-2">
+                          <div className="alert alert-success">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="stroke-current shrink-0 h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span>Address Copied!</span>
+                          </div>
+                        </div>
+                      )}
                     </li>
                   ))}
               </div>
