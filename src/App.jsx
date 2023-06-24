@@ -79,8 +79,21 @@ function App() {
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg order-2 md:order-1 border border-2">
-          <button>View Inscription</button>
+        <div className="rounded-lg order-2 md:order-1 border">
+          <img
+            className="rounded-lg"
+            src="https://ordinals.com/content/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0"
+          ></img>
+          <button
+            onClick={() =>
+              window.open(
+                "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
+                "_blank"
+              )
+            }
+          >
+            View Inscription
+          </button>
         </div>
 
         <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
@@ -106,7 +119,7 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg flex flex-col border-4">
+        <div className="rounded-lg flex flex-col border">
           <div className="p-[24px] border border-b-2 border-x-0 border-y-0">
             <h1 className="text-[18px] font-semibold">Inscription Details</h1>
           </div>
@@ -130,7 +143,7 @@ function App() {
           </ul>
         </div>
 
-        <div className="rounded-lg p-[24px] flex flex-col border-4 gap-[24px]">
+        <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
           <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
           <p>
             The king of $OXBT, the BitGod21 Annon onboarded masses in their
@@ -163,7 +176,7 @@ function App() {
           </div>
         </div>
 
-        <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border-4">
+        <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border">
           <h1 className="text-[28px]">Leaderboard</h1>
           <div className="flex">
             <input
@@ -176,7 +189,7 @@ function App() {
             <button onClick={handleSearch}>Search</button>
           </div>
           <div>
-            <ul className="border border-4">
+            <ul className="border">
               <li className="flex justify-between border border-b-2 border-x-0 border-y-0 p-[24px]">
                 <h5>Wallet</h5>
                 <h5>Tickets</h5>
