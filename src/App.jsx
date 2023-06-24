@@ -11,20 +11,39 @@ function App() {
 
   async function getAddressDetail() {
     try {
-      let tokenAddress =
-        "bc1pus3ue90xcrq2sh7tlfaghw89rlgvr9986xh86qemct85zq2v839q7mmve2";
+      let userAddress =
+        "bc1pm3pta3ameq47c5cdp036mwq23ca6th0jrvt7a5ehy76fu98g82asgks6lz";
       let tokenTicker = "BTOC";
+      let ticketPrice = 100;
+      // let startBlock = 1687030997;
 
       let response = await axios({
         method: "get",
-        url:
-          `https://unisat.io/brc20-api-v2/address/${tokenAddress}/brc20/${tokenTicker}/history?start=0&limit=20`,
+        url: `https://unisat.io/brc20-api-v2/address/${userAddress}/brc20/${tokenTicker}/history?start=0&limit=512&type=receive`,
       });
 
       if (response.data.msg == "ok") {
         let tokenData = response.data.data;
-        let resultTokens = tokenData.detail;
-        setTokens(resultTokens);
+        let resultTransfers = tokenData.detail;
+        let result = [{}];
+        for (let i = 0; i < resultTransfers.length; i++) {
+          // if (resultTransfers.blocktime < startBlock) continue;
+          let user = resultTransfers[i].from;
+          let amount = parseInt(resultTransfers[i].amount);
+          let userExists = result.find((obj) => obj.from === user);
+          if (userExists) {
+            userExists.amount += amount;
+            userExists.ticket = Math.floor(userExists.amount / ticketPrice);
+          } else {
+            result[i] = {
+              from: user,
+              amount: amount,
+              ticket: Math.floor(amount / ticketPrice),
+            };
+          }
+        }
+        result.sort((a, b) => b.ticket - a.ticket);
+        setTokens(result);
       }
     } catch (e) {
       console.log(e);
@@ -61,7 +80,6 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-
         <div className="flex flex-col border-4">
           <div className="p-[24px] border border-b-2 border-x-0 border-y-0">
             <h1 className="text-[18px] font-semibold">Inscription Details</h1>
@@ -129,10 +147,14 @@ function App() {
                 <h5>Tickets</h5>
               </li>
               {tokens.length > 0 &&
-                tokens.map((token) => (
+                tokens.map((token, key) => (
                   <li className="p-[24px] flex justify-between">
-                    <h5>{token.from.substring(0,12) + "..."}</h5>
-                    <p>{token.amount}</p>
+                    <h5>
+                      {token.from.substring(0, 4) +
+                        "..." +
+                        token.from.substring(token.from.length - 4)}
+                    </h5>
+                    <p>{token.ticket}</p>
                   </li>
                 ))}
             </ul>
