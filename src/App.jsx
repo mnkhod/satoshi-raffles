@@ -308,7 +308,7 @@ function App() {
                     .map((token, key) => (
                       <li className="p-[24px] flex justify-between" key={key}>
                         <a
-                          className="cursor-pointer"
+                          className="cursor-pointer text-white hover:text-gray-400"
                           onClick={() =>
                             handleLeaderboardWalletClick(token.from, key)
                           }
