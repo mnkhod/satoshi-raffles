@@ -8,8 +8,16 @@ function App() {
   const [searchWallet, setSearchWallet] = useState("");
   const [buyPanelOpen, setBuyPanelOpen] = useState(false);
   const [buyTicketAmount, setBuyTicketAmount] = useState(1);
+  const [isCopied, setIsCopied] = useState(false);
 
   const [state, setState] = useState([]);
+
+  const userAddress =
+    "bc1pm3pta3ameq47c5cdp036mwq23ca6th0jrvt7a5ehy76fu98g82asgks6lz";
+  const tokenTicker = "BTOC";
+  const ticketPrice = 100;
+  const minTicketAmount = 1;
+  const maxTicketAmount = 1000;
 
   useEffect(() => {
     getAddressDetail();
@@ -17,10 +25,6 @@ function App() {
 
   async function getAddressDetail() {
     try {
-      let userAddress =
-        "bc1pm3pta3ameq47c5cdp036mwq23ca6th0jrvt7a5ehy76fu98g82asgks6lz";
-      let tokenTicker = "BTOC";
-      let ticketPrice = 100;
       // let startBlock = 1687030997;
 
       let response = await axios({
@@ -56,7 +60,7 @@ function App() {
     }
   }
 
-  const handleClick = (address, index) => {
+  const handleLeaderboardWalletClick = (address, index) => {
     navigator.clipboard.writeText(address);
     setCopiedIndex(index);
     setTimeout(() => {
@@ -80,6 +84,14 @@ function App() {
 
   const handleBuyButton = () => {
     setBuyPanelOpen(!buyPanelOpen);
+  };
+
+  const handleCepoyDepositAddressButton = () => {
+    navigator.clipboard.writeText(userAddress);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 3000);
   };
 
   return (
@@ -155,21 +167,44 @@ function App() {
             <div className="grid grid-cols-2">
               <div>
                 <p>Price per ticket</p>
-                <h2>100 OXBT</h2>
+                <h2>{ticketPrice} OXBT</h2>
               </div>
               <div>
                 <p>Select amount</p>
                 <h2>1-1000</h2>
               </div>
-              <div>
-                <input
-                  type="numeric"
-                  name="buyTicketAmount"
-                  onChange={handleChange}
-                  max={1000}
-                  min={1}
-                  value={buyTicketAmount}
-                ></input>
+              <div className="flex justify-center items-center" role="group">
+                <div className="flex items-center border-2 rounded-lg text-lg">
+                  <button
+                    className="px-4 py-2  text-white rounded-l rounded-r-none bg-inherit"
+                    onClick={() =>
+                      setBuyTicketAmount((prevAmount) =>
+                        Math.max(prevAmount - 1, minTicketAmount)
+                      )
+                    }
+                  >
+                    -
+                  </button>
+                  <input
+                    className="w-20 px-2 py-2 text-center bg-inherit"
+                    type="text"
+                    min="1"
+                    max="1000"
+                    value={buyTicketAmount}
+                    placeholder="1"
+                    onChange={(e) => setBuyTicketAmount(e.target.value)}
+                  />
+                  <button
+                    className="px-4 py-2 text-white rounded-r rounded-l-none bg-inherit"
+                    onClick={() =>
+                      setBuyTicketAmount((prevAmount) =>
+                        Math.min(prevAmount + 1, maxTicketAmount)
+                      )
+                    }
+                  >
+                    +
+                  </button>
+                </div>
               </div>
               <div>
                 <p>Deposit Address</p>
@@ -179,10 +214,13 @@ function App() {
                     "bc1p0kh6z4fdakldgjladfnmglvkfjddfasdfsdfgs564blkfg0masdlfh"
                   }
                 ></textarea>
+                <button onClick={handleCepoyDepositAddressButton}>
+                  {isCopied ? "Address Copied!" : "Copy Address"}
+                </button>
               </div>
               <div>
                 <p>Total cost</p>
-                <h2>100 OXBT</h2>
+                <h2>{buyTicketAmount * ticketPrice} OXBT</h2>
               </div>
             </div>
             <div className="w-full h-0.5 bg-gray-300"></div>
@@ -271,7 +309,9 @@ function App() {
                       <li className="p-[24px] flex justify-between" key={key}>
                         <a
                           className="cursor-pointer"
-                          onClick={() => handleClick(token.from, key)}
+                          onClick={() =>
+                            handleLeaderboardWalletClick(token.from, key)
+                          }
                         >
                           {token.from.substring(0, 4) +
                             "..." +
