@@ -7,6 +7,7 @@ function App() {
   const [copiedIndex, setCopiedIndex] = useState(-1);
   const [searchWallet, setSearchWallet] = useState("");
   const [buyPanelOpen, setBuyPanelOpen] = useState(false);
+  const [buyTicketAmount, setBuyTicketAmount] = useState(1);
 
   const [state, setState] = useState([]);
 
@@ -161,7 +162,14 @@ function App() {
                 <h2>1-1000</h2>
               </div>
               <div>
-                <input type="numeric" onChange={handleChange}></input>
+                <input
+                  type="numeric"
+                  name="buyTicketAmount"
+                  onChange={handleChange}
+                  max={1000}
+                  min={1}
+                  value={buyTicketAmount}
+                ></input>
               </div>
               <div>
                 <p>Deposit Address</p>
