@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import moment from "moment";
 
 function App() {
   const [tokens, setTokens] = useState([]);
@@ -10,6 +11,9 @@ function App() {
   const [buyTicketAmount, setBuyTicketAmount] = useState(1);
   const [isCopied, setIsCopied] = useState(false);
 
+  const [lastUpdated, setLastUpdated] = useState(moment());
+  const [timeDifference, setTimeDifference] = useState("");
+
   const [state, setState] = useState([]);
 
   const userAddress =
@@ -18,15 +22,31 @@ function App() {
   const ticketPrice = 100;
   const minTicketAmount = 1;
   const maxTicketAmount = 1000;
+  // const startBlock = 1687030997;
 
   useEffect(() => {
     getAddressDetail();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentTime = moment();
+      const diff = currentTime.diff(lastUpdated);
+      const duration = moment.duration(diff);
+      const hours = duration.hours().toString().padStart(2, "0");
+      const minutes = duration.minutes().toString().padStart(2, "0");
+      const seconds = duration.seconds().toString().padStart(2, "0");
+      const formattedDiff = `${hours}H:${minutes}M:${seconds}S ago`;
+      setTimeDifference(formattedDiff);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [lastUpdated]);
+
   async function getAddressDetail() {
     try {
-      // let startBlock = 1687030997;
-
       let response = await axios({
         method: "get",
         url: `https://unisat.io/brc20-api-v2/address/${userAddress}/brc20/${tokenTicker}/history?start=0&limit=512&type=receive`,
@@ -54,6 +74,7 @@ function App() {
         }
         result.sort((a, b) => b.ticket - a.ticket);
         setTokens(result);
+        setLastUpdated(moment());
       }
     } catch (e) {
       console.log(e);
@@ -167,7 +188,7 @@ function App() {
             <div className="grid grid-cols-2">
               <div>
                 <p>Price per ticket</p>
-                <h2>{ticketPrice} OXBT</h2>
+                <h2>{ticketPrice} PSAT</h2>
               </div>
               <div>
                 <p>Select amount</p>
@@ -214,13 +235,16 @@ function App() {
                     "bc1p0kh6z4fdakldgjladfnmglvkfjddfasdfsdfgs564blkfg0masdlfh"
                   }
                 ></textarea>
-                <button onClick={handleCepoyDepositAddressButton}>
+                <button
+                  className={isCopied ? "text-orange-500" : ""}
+                  onClick={handleCepoyDepositAddressButton}
+                >
                   {isCopied ? "Address Copied!" : "Copy Address"}
                 </button>
               </div>
               <div>
                 <p>Total cost</p>
-                <h2>{buyTicketAmount * ticketPrice} OXBT</h2>
+                <h2>{buyTicketAmount * ticketPrice} PSAT</h2>
               </div>
             </div>
             <div className="w-full h-0.5 bg-gray-300"></div>
@@ -248,7 +272,7 @@ function App() {
           <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
             <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
             <p>
-              The king of $OXBT, the BitGod21 Annon onboarded masses in their
+              The king of $PSAT, the BitGod21 Annon onboarded masses in their
               thousands to the Ordinals Ecosystem. He is a treasured artefact
               inscribed into a treasured sat.
             </p>
@@ -256,7 +280,7 @@ function App() {
             <div className="grid grid-cols-2">
               <div>
                 <p>Price per ticket</p>
-                <h2>100 OXBT</h2>
+                <h2>100 PSAT</h2>
               </div>
               <div>
                 <p>Tickets purchased</p>
@@ -281,6 +305,25 @@ function App() {
 
         <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border">
           <h1 className="text-[28px]">Leaderboard</h1>
+
+          <div className="flex items-center justify-between">
+            <p>Last updated: {timeDifference}</p>
+            <button onClick={getAddressDetail} className="bg-inherit">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.5374 17.5674C14.7844 19.0831 12.4993 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 12.1361 19.3302 14.1158 18.1892 15.7406L15 10H18C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C12.1502 18 14.1022 17.1517 15.5398 15.7716L16.5374 17.5674Z"
+                  fill="white"
+                />
+              </svg>
+            </button>
+          </div>
+
           <div className="flex">
             <input
               type="text"
