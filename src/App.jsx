@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import CountdownTimer from "./components/CountdownTimer";
 
 function App() {
   const [tokens, setTokens] = useState([]);
@@ -23,6 +24,7 @@ function App() {
   const minTicketAmount = 1;
   const maxTicketAmount = 1000;
   // const startBlock = 1687030997;
+  const startingTime = "2023-06-26T00:00:00+00:00";
 
   useEffect(() => {
     getAddressDetail();
@@ -294,7 +296,7 @@ function App() {
             <div className="grid grid-cols-2">
               <div>
                 <p>Raffle ends in:</p>
-                <h4>25H : 34M : 37S</h4>
+                <CountdownTimer />
               </div>
               <div>
                 <button onClick={handleBuyButton}>Buy tickets</button>
