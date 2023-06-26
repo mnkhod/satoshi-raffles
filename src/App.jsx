@@ -120,13 +120,13 @@ function App() {
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg order-2 md:order-1 border">
+        <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray">
           <img
             className="rounded-lg"
             src="https://ordinals.com/content/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0"
           ></img>
           <button
-            className="text-lg"
+            className="text-lg bg-defaultGray border-lightGray"
             onClick={() =>
               window.open(
                 "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
@@ -168,8 +168,8 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg flex flex-col border">
-          <div className="p-[24px] border border-b-2 border-x-0 border-y-0">
+        <div className="rounded-lg flex flex-col border bg-darkGray ">
+          <div className="p-[24px] border border-b-2 border-x-0 border-y-0 bg-defaultGray border-lightGray rounded-t-lg">
             <h1 className="text-lg font-semibold">Inscription Details</h1>
           </div>
           <ul className="px-[24px] text-sm">
@@ -192,7 +192,7 @@ function App() {
           </ul>
         </div>
         {buyPanelOpen ? (
-          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
+          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
             <h1 className="text-3xl">BTC Annons | Artefacts</h1>
             <div className="w-full h-0.5 bg-gray-300"></div>
             <div className="grid grid-cols-2">
@@ -285,7 +285,7 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
+          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
             <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
             <p className="text-base">
               The king of $PSAT, the BitGod21 Annon onboarded masses in their
@@ -313,7 +313,10 @@ function App() {
                 <CountdownTimer />
               </div>
               <div>
-                <button className="text-lg" onClick={handleBuyButton}>
+                <button
+                  className="text-lg bg-darkerLightGray border-lightGray"
+                  onClick={handleBuyButton}
+                >
                   Buy tickets
                 </button>
               </div>
@@ -321,7 +324,7 @@ function App() {
           </div>
         )}
 
-        <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border">
+        <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border bg-defaultGray">
           <h1 className="text-3xl">Leaderboard</h1>
 
           <div className="flex items-center justify-between">
@@ -346,11 +349,14 @@ function App() {
             <input
               type="text"
               name="searchWallet"
-              className="grow border-2"
+              className="grow rounded-lg bg-defaultGray border border-lightGray"
               onChange={handleChange}
               onKeyPress={handleKeyPress}
             />
-            <button className="text-lg" onClick={handleSearch}>
+            <button
+              className="text-lg bg-defaultGray border border-lightGray"
+              onClick={handleSearch}
+            >
               Search
             </button>
           </div>
@@ -370,7 +376,7 @@ function App() {
                     )
                     .map((token, key) => (
                       <li
-                        className="p-[24px] flex justify-between text-lg"
+                        className="p-[24px] flex justify-between text-lg bg-darkGray border border-lightGray"
                         key={key}
                       >
                         <a
