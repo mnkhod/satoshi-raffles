@@ -261,7 +261,7 @@ function App() {
                   }
                   onClick={handleCepoyDepositAddressButton}
                 >
-                  {isCopied ? "Address Copied!" : "Copy Address"}
+                  {isCopied ? "Copied to clipboard" : "Copy Address"}
                 </button>
               </div>
               <div>
