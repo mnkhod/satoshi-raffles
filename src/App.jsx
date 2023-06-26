@@ -18,13 +18,12 @@ function App() {
   const [state, setState] = useState([]);
 
   const userAddress =
-    "bc1pm3pta3ameq47c5cdp036mwq23ca6th0jrvt7a5ehy76fu98g82asgks6lz";
-  const tokenTicker = "BTOC";
+    "bc1pt4ad4yhxr76gcx5v2g77far8eqz82ndu58qkrkt9xfya6dcrjl6qw289yx";
+  const tokenTicker = "PSAT";
   const ticketPrice = 100;
   const minTicketAmount = 1;
   const maxTicketAmount = 1000;
   // const startBlock = 1687030997;
-  const startingTime = "2023-06-26T00:00:00+00:00";
 
   useEffect(() => {
     getAddressDetail();
@@ -57,7 +56,7 @@ function App() {
       if (response.data.msg == "ok") {
         let tokenData = response.data.data;
         let resultTransfers = tokenData.detail;
-        let result = [{}];
+        let result = [];
         for (let i = 0; i < resultTransfers.length; i++) {
           // if (resultTransfers.blocktime < startBlock) continue;
           let user = resultTransfers[i].from;
@@ -67,11 +66,12 @@ function App() {
             userExists.amount += amount;
             userExists.ticket = Math.floor(userExists.amount / ticketPrice);
           } else {
-            result[i] = {
+            result.push({
+              // Use push to add new objects to the array
               from: user,
               amount: amount,
               ticket: Math.floor(amount / ticketPrice),
-            };
+            });
           }
         }
         result.sort((a, b) => b.ticket - a.ticket);
@@ -138,7 +138,12 @@ function App() {
         </div>
 
         <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
-          <h1 className="text-[48px]">Satoshi Pit Beta</h1>
+          <div>
+            <span className="text-[48px] text-orange-500 font-semibold">
+              Satoshi Pit
+            </span>
+            <span className="text-[48px] text-orange-500"> Beta</span>
+          </div>
           <p>
             A place to partake in the raffles of unique and abstract Ordinal
             Artefacts, powered by BRC20.
