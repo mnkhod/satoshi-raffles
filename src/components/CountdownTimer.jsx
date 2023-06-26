@@ -33,7 +33,7 @@ function CountdownTimer() {
 
   return (
     <div>
-      <p>{remainingTime}</p>
+      <p className="text-3xl">{remainingTime}</p>
     </div>
   );
 }

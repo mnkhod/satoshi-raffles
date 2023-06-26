@@ -126,6 +126,7 @@ function App() {
             src="https://ordinals.com/content/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0"
           ></img>
           <button
+            className="text-lg"
             onClick={() =>
               window.open(
                 "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
@@ -139,26 +140,28 @@ function App() {
 
         <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
           <div>
-            <span className="text-[48px] text-orange-500 font-semibold">
+            <span className="text-5xl text-orange-500 font-semibold">
               Satoshi Pit
             </span>
             <span className="text-[48px] text-orange-500"> Beta</span>
           </div>
-          <p>
+          <p className="text-base">
             A place to partake in the raffles of unique and abstract Ordinal
             Artefacts, powered by BRC20.
           </p>
           <div>
             <div className="flex flex-col gap-3">
-              <h2 className="text-2xl">How to enter</h2>
-              <p>
+              <h2 className="text-3xl">How to enter</h2>
+              <p className="text-base">
                 Purchase a ticket by clicking ‘Buy tickets’ and following the
                 instructions. Once the transaction is confirmed, your tickets
                 will be credited to the wallet address you deposited with, you
                 can paste your wallet into the search bar under the leaderboard
                 to show total tickets in your account.
               </p>
-              <p>For more detailed instructions, take a look at our guide.</p>
+              <p className="text-base ">
+                For more detailed instructions, take a look at our guide.
+              </p>
             </div>
           </div>
         </div>
@@ -167,9 +170,9 @@ function App() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
         <div className="rounded-lg flex flex-col border">
           <div className="p-[24px] border border-b-2 border-x-0 border-y-0">
-            <h1 className="text-[18px] font-semibold">Inscription Details</h1>
+            <h1 className="text-lg font-semibold">Inscription Details</h1>
           </div>
-          <ul className="px-[24px]">
+          <ul className="px-[24px] text-sm">
             <li className="flex justify-between py-[16px]">
               <h5>ID</h5>
               <p>1119</p>
@@ -190,16 +193,16 @@ function App() {
         </div>
         {buyPanelOpen ? (
           <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
-            <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
+            <h1 className="text-3xl">BTC Annons | Artefacts</h1>
             <div className="w-full h-0.5 bg-gray-300"></div>
             <div className="grid grid-cols-2">
               <div>
-                <p>Price per ticket</p>
-                <h2>{ticketPrice} PSAT</h2>
+                <p className="text-base">Price per ticket</p>
+                <h2 className="text-3xl">{ticketPrice} PSAT</h2>
               </div>
               <div>
-                <p>Select amount</p>
-                <h2>1-1000</h2>
+                <p className="text-base">Select amount</p>
+                <h2 className="text-3xl ">1-1000</h2>
               </div>
               <div className="flex justify-center items-center" role="group">
                 <div className="flex items-center border-2 rounded-lg text-lg">
@@ -214,7 +217,7 @@ function App() {
                     -
                   </button>
                   <input
-                    className="w-20 px-2 py-2 text-center bg-inherit"
+                    className="w-20 px-2 py-2 text-center bg-inherit text-xl"
                     type="text"
                     min="1"
                     max="1000"
@@ -235,32 +238,38 @@ function App() {
                 </div>
               </div>
               <div>
-                <p>Deposit Address</p>
+                <p className="text-base">Deposit Address</p>
                 <textarea
-                  className="w-full h-24"
+                  className="w-full h-24 text-base"
                   value={
                     "bc1p0kh6z4fdakldgjladfnmglvkfjddfasdfsdfgs564blkfg0masdlfh"
                   }
                 ></textarea>
                 <button
-                  className={isCopied ? "text-orange-500" : ""}
+                  className={isCopied ? "text-orange-500 text-lg" : "text-lg"}
                   onClick={handleCepoyDepositAddressButton}
                 >
                   {isCopied ? "Address Copied!" : "Copy Address"}
                 </button>
               </div>
               <div>
-                <p>Total cost</p>
-                <h2>{buyTicketAmount * ticketPrice} PSAT</h2>
+                <p className="text-base">Total cost</p>
+                <h2 className="text-3xl">
+                  {buyTicketAmount * ticketPrice} PSAT
+                </h2>
               </div>
             </div>
             <div className="w-full h-0.5 bg-gray-300"></div>
-            <div className="grid grid-cols-2">
-              <div>
+            <div className="flex flex-col">
+              <div className="text-base">
                 <p>
                   Deposit the amount shown in “Total cost” to the deposit
                   address to enter the draw. Please note this deposit is
-                  NON-REFUNDABLE. For a more in-depth guide, read here
+                  <span className="font-semibold"> NON-REFUNDABLE.</span> For a
+                  more in-depth guide,{" "}
+                  <a className="cursor-pointer underline text-white hover:text-gray-400">
+                    read here
+                  </a>
                 </p>
               </div>
               <div>
@@ -278,7 +287,7 @@ function App() {
         ) : (
           <div className="rounded-lg p-[24px] flex flex-col border gap-[24px]">
             <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
-            <p>
+            <p className="text-base">
               The king of $PSAT, the BitGod21 Annon onboarded masses in their
               thousands to the Ordinals Ecosystem. He is a treasured artefact
               inscribed into a treasured sat.
@@ -286,12 +295,12 @@ function App() {
             <div className="w-full h-0.5 bg-gray-300"></div>
             <div className="grid grid-cols-2">
               <div>
-                <p>Price per ticket</p>
-                <h2>100 PSAT</h2>
+                <p className="text-base">Price per ticket</p>
+                <h2 className="text-3xl">100 PSAT</h2>
               </div>
               <div>
-                <p>Tickets purchased</p>
-                <h2>
+                <p className="text-base">Tickets purchased</p>
+                <h2 className="text-3xl">
                   {tokens.length > 0 &&
                     tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)}
                 </h2>
@@ -300,21 +309,23 @@ function App() {
             <div className="w-full h-0.5 bg-gray-300"></div>
             <div className="grid grid-cols-2">
               <div>
-                <p>Raffle ends in:</p>
+                <p className="text-base">Raffle ends in:</p>
                 <CountdownTimer />
               </div>
               <div>
-                <button onClick={handleBuyButton}>Buy tickets</button>
+                <button className="text-lg" onClick={handleBuyButton}>
+                  Buy tickets
+                </button>
               </div>
             </div>
           </div>
         )}
 
         <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border">
-          <h1 className="text-[28px]">Leaderboard</h1>
+          <h1 className="text-3xl">Leaderboard</h1>
 
           <div className="flex items-center justify-between">
-            <p>Last updated: {timeDifference}</p>
+            <p className="text-base">Last updated: {timeDifference}</p>
             <button onClick={getAddressDetail} className="bg-inherit">
               <svg
                 width="20"
@@ -339,11 +350,13 @@ function App() {
               onChange={handleChange}
               onKeyPress={handleKeyPress}
             />
-            <button onClick={handleSearch}>Search</button>
+            <button className="text-lg" onClick={handleSearch}>
+              Search
+            </button>
           </div>
           <div>
             <ul className="border">
-              <li className="flex justify-between border border-b-2 border-x-0 border-y-0 p-[24px]">
+              <li className="flex justify-between border border-b-2 border-x-0 border-y-0 p-[24px] text-lg">
                 <h5>Wallet</h5>
                 <h5>Tickets</h5>
               </li>
@@ -356,7 +369,10 @@ function App() {
                         .includes(searchWallet.toLowerCase())
                     )
                     .map((token, key) => (
-                      <li className="p-[24px] flex justify-between" key={key}>
+                      <li
+                        className="p-[24px] flex justify-between text-lg"
+                        key={key}
+                      >
                         <a
                           className="cursor-pointer text-white hover:text-gray-400"
                           onClick={() =>
