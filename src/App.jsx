@@ -168,7 +168,7 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg flex flex-col border bg-darkGray ">
+        <div className="rounded-lg flex flex-col border bg-darkGray">
           <div className="p-[24px] border border-b-2 border-x-0 border-y-0 bg-defaultGray border-lightGray rounded-t-lg">
             <h1 className="text-lg font-semibold">Inscription Details</h1>
           </div>
@@ -193,7 +193,15 @@ function App() {
         </div>
         {buyPanelOpen ? (
           <div className="rounded-lg p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
-            <h1 className="text-3xl">BTC Annons | Artefacts</h1>
+            <div className="flex justify-between">
+              <h1 className="text-3xl">BTC Annons | Artefacts</h1>
+              <h1
+                className="bg-inherit text-3xl cursor-pointer"
+                onClick={handleBuyButton}
+              >
+                X
+              </h1>
+            </div>
             <div className="w-full h-0.5 bg-gray-300"></div>
             <div className="grid grid-cols-2">
               <div>
@@ -205,9 +213,9 @@ function App() {
                 <h2 className="text-3xl ">1-1000</h2>
               </div>
               <div className="flex justify-center items-center" role="group">
-                <div className="flex items-center border-2 rounded-lg text-lg">
+                <div className="flex items-center rounded-lg text-lg border-4 border-lightGray bg-darkGray">
                   <button
-                    className="px-4 py-2  text-white rounded-l rounded-r-none bg-inherit"
+                    className="px-4 py-2 text-5xl text-white rounded-r-none bg-inherit"
                     onClick={() =>
                       setBuyTicketAmount((prevAmount) =>
                         Math.max(prevAmount - 1, minTicketAmount)
@@ -226,7 +234,7 @@ function App() {
                     onChange={(e) => setBuyTicketAmount(e.target.value)}
                   />
                   <button
-                    className="px-4 py-2 text-white rounded-r rounded-l-none bg-inherit"
+                    className="px-4 py-2 text-5xl text-white rounded-r rounded-l-none bg-inherit"
                     onClick={() =>
                       setBuyTicketAmount((prevAmount) =>
                         Math.min(prevAmount + 1, maxTicketAmount)
@@ -240,13 +248,17 @@ function App() {
               <div>
                 <p className="text-base">Deposit Address</p>
                 <textarea
-                  className="w-full h-24 text-base"
+                  className="w-full h-24 text-base bg-defaultGray border-4 inline-block border-lightGray resize-none text-start"
                   value={
                     "bc1p0kh6z4fdakldgjladfnmglvkfjddfasdfsdfgs564blkfg0masdlfh"
                   }
                 ></textarea>
                 <button
-                  className={isCopied ? "text-orange-500 text-lg" : "text-lg"}
+                  className={
+                    isCopied
+                      ? "text-orange-500 text-lg bg-darkerLightGray border-lightGray"
+                      : "text-lg bg-darkerLightGray border-lightGray"
+                  }
                   onClick={handleCepoyDepositAddressButton}
                 >
                   {isCopied ? "Address Copied!" : "Copy Address"}
@@ -278,9 +290,6 @@ function App() {
                   deposit wallet into the search bar and your total tickets will
                   be shown for the draw.
                 </p>
-              </div>
-              <div>
-                <button onClick={handleBuyButton}>Close</button>
               </div>
             </div>
           </div>
