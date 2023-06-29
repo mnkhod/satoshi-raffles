@@ -109,7 +109,7 @@ function App() {
     setBuyPanelOpen(!buyPanelOpen);
   };
 
-  const handleCepoyDepositAddressButton = () => {
+  const handleCopyDepositAddressButton = () => {
     navigator.clipboard.writeText(userAddress);
     setIsCopied(true);
     setTimeout(() => {
@@ -126,7 +126,7 @@ function App() {
             src="https://ordinals.com/content/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0"
           ></img>
           <button
-            className="text-lg bg-defaultGray border-lightGray"
+            className="text-lg bg-defaultGray border-lightGray px-[16px] py-[10px]"
             onClick={() =>
               window.open(
                 "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
@@ -215,7 +215,7 @@ function App() {
               <div className="flex justify-center items-center" role="group">
                 <div className="flex items-center rounded-lg text-lg border-4 border-lightGray bg-darkGray">
                   <button
-                    className="px-4 py-2 text-5xl text-white rounded-r-none bg-inherit"
+                    className="px-6 py-2 text-5xl text-white rounded-r-none bg-inherit"
                     onClick={() =>
                       setBuyTicketAmount((prevAmount) =>
                         Math.max(prevAmount - 1, minTicketAmount)
@@ -259,7 +259,7 @@ function App() {
                       ? "text-orange-500 text-lg bg-darkerLightGray border-lightGray"
                       : "text-lg bg-darkerLightGray border-lightGray"
                   }
-                  onClick={handleCepoyDepositAddressButton}
+                  onClick={handleCopyDepositAddressButton}
                 >
                   {isCopied ? "Copied to clipboard" : "Copy Address"}
                 </button>
