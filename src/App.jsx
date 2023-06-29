@@ -120,22 +120,24 @@ function App() {
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray">
+        <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray w-max py-2 px-2">
           <img
-            className="rounded-lg"
+            className="rounded-lg w-72 h-72"
             src="https://ordinals.com/content/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0"
           ></img>
-          <button
-            className="text-lg bg-defaultGray border-lightGray px-[16px] py-[10px]"
-            onClick={() =>
-              window.open(
-                "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
-                "_blank"
-              )
-            }
-          >
-            View Inscription
-          </button>
+          <div className="flex justify-center mt-2">
+            <button
+              className="text-lg bg-defaultGray border-lightGray px-[16px] py-[10px] w-72 h-14"
+              onClick={() =>
+                window.open(
+                  "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
+                  "_blank"
+                )
+              }
+            >
+              View Inscription
+            </button>
+          </div>
         </div>
 
         <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
@@ -167,25 +169,25 @@ function App() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg flex flex-col border bg-darkGray">
-          <div className="p-[24px] border border-b-2 border-x-0 border-y-0 bg-defaultGray border-lightGray rounded-t-lg">
+      <div className="grid grid-cols-1 md:grid-cols-3">
+        <div className="col-span-1 rounded-lg flex flex-col border bg-darkGray w-72 h-[262px]">
+          <div className="px-[24px] py-[12px] h-14 border border-b-2 border-x-0 border-y-0 bg-defaultGray border-lightGray rounded-t-lg">
             <h1 className="text-lg font-semibold">Inscription Details</h1>
           </div>
-          <ul className="px-[24px] text-sm">
-            <li className="flex justify-between py-[16px]">
+          <ul className="text-sm">
+            <li className="py-4 px-6 flex justify-between">
               <h5>ID</h5>
               <p>1119</p>
             </li>
-            <li className="flex justify-between py-[16px]">
+            <li className="py-4 px-6 flex justify-between">
               <h5>Number</h5>
               <p>1119</p>
             </li>
-            <li className="flex justify-between py-[16px]">
+            <li className="py-4 px-6 flex justify-between">
               <h5>Owner</h5>
               <p>0x...C544</p>
             </li>
-            <li className="flex justify-between py-[16px]">
+            <li className="py-4 px-6 flex justify-between">
               <h5>Set Rarity</h5>
               <p>5%</p>
             </li>
@@ -294,7 +296,7 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
+          <div className="rounded-lg w-[514px] p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
             <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
             <p className="text-base">
               The king of $PSAT, the BitGod21 Annon onboarded masses in their
