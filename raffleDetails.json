@@ -1,7 +1,7 @@
 {
   "userAddress": "bc1pt4ad4yhxr76gcx5v2g77far8eqz82ndu58qkrkt9xfya6dcrjl6qw289yx",
-  "tokenTicker": "COUT",
-  "ticketPrice": 1,
+  "tokenTicker": "PSAT",
+  "ticketPrice": 100,
   "minTicketAmount": 1,
   "maxTicketAmount": 1000,
   "winner": "bc1pt4ad4yhxr76gcx5v2g77far8eqz82ndu58qkrkt9xfya6dcrjl6qw289yx",
