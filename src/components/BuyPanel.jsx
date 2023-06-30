@@ -140,8 +140,9 @@ export default function BuyPanel({ tokens }) {
             <div>
               <p className="text-base">Tickets purchased</p>
               <h2 className="text-3xl">
-                {tokens.length > 0 &&
-                  tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)}
+                {tokens.length > 0
+                  ? tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)
+                  : 0}
               </h2>
             </div>
           </div>
