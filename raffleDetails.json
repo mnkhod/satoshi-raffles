@@ -1,0 +1,19 @@
+{
+  "userAddress": "bc1pt4ad4yhxr76gcx5v2g77far8eqz82ndu58qkrkt9xfya6dcrjl6qw289yx",
+  "tokenTicker": "PSAT",
+  "ticketPrice": 100,
+  "minTicketAmount": 1,
+  "maxTicketAmount": 1000,
+  "winner": "bc1pt4ad4yhxr76gcx5v2g77far8eqz82ndu58qkrkt9xfya6dcrjl6qw289yx",
+  "startTime": "June 24th 2023, 9:44:55 pm",
+  "endTime": "June 25th 2023, 9:44:55 pm",
+  "timeFormat": "MMMM Do YYYY, h:mm:ss a",
+  "prize": {
+    "name": "Satoshi Punk #23",
+    "description": "Satoshi Punks are here to shake things up. Each Punks is crafted with love and passion, pixel by pixel, to help you express yourself. If you're a punk at heart, who is tired of the same old same old, the join our tribe. Let's admire our JPEGs together and create cool stuff.",
+    "id": "adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
+    "number": 66432,
+    "rarity": "Common",
+    "satributes": ["Block 78", " Hal"]
+  }
+}

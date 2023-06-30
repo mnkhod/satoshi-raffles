@@ -7,6 +7,7 @@ export default {
         lightGray: "#737373",
         darkerLightGray: "#424242",
         lighterGray: "#D6D6D6",
+        lighterDarkGray: "#232323",
         darkGray: "#202020",
         defaultGray: "#292929",
       },

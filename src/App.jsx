@@ -2,55 +2,26 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import CountdownTimer from "./components/CountdownTimer";
+
+import InscriptionDetails from "./components/InscriptionDetails";
+import ViewInscription from "./components/ViewInscription";
+import BuyPanel from "./components/BuyPanel";
+import Leaderboard from "./components/Leaderboard";
+
+import raffle from "../raffleDetails.json";
 
 function App() {
   const [tokens, setTokens] = useState([]);
-  const [copiedIndex, setCopiedIndex] = useState(-1);
-  const [searchWallet, setSearchWallet] = useState("");
-  const [buyPanelOpen, setBuyPanelOpen] = useState(false);
-  const [buyTicketAmount, setBuyTicketAmount] = useState(1);
-  const [isCopied, setIsCopied] = useState(false);
-
-  const [lastUpdated, setLastUpdated] = useState(moment());
-  const [timeDifference, setTimeDifference] = useState("");
-
-  const [state, setState] = useState([]);
-
-  const userAddress =
-    "bc1pt4ad4yhxr76gcx5v2g77far8eqz82ndu58qkrkt9xfya6dcrjl6qw289yx";
-  const tokenTicker = "PSAT";
-  const ticketPrice = 100;
-  const minTicketAmount = 1;
-  const maxTicketAmount = 1000;
-  // const startBlock = 1687030997;
 
   useEffect(() => {
     getAddressDetail();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const currentTime = moment();
-      const diff = currentTime.diff(lastUpdated);
-      const duration = moment.duration(diff);
-      const hours = duration.hours().toString().padStart(2, "0");
-      const minutes = duration.minutes().toString().padStart(2, "0");
-      const seconds = duration.seconds().toString().padStart(2, "0");
-      const formattedDiff = `${hours}H:${minutes}M:${seconds}S ago`;
-      setTimeDifference(formattedDiff);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [lastUpdated]);
-
   async function getAddressDetail() {
     try {
       let response = await axios({
         method: "get",
-        url: `https://unisat.io/brc20-api-v2/address/${userAddress}/brc20/${tokenTicker}/history?start=0&limit=512&type=receive`,
+        url: `https://unisat.io/brc20-api-v2/address/${raffle.userAddress}/brc20/${raffle.tokenTicker}/history?start=0&limit=512&type=receive`,
       });
 
       if (response.data.msg == "ok") {
@@ -64,81 +35,30 @@ function App() {
           let userExists = result.find((obj) => obj.from === user);
           if (userExists) {
             userExists.amount += amount;
-            userExists.ticket = Math.floor(userExists.amount / ticketPrice);
+            userExists.ticket = Math.floor(
+              userExists.amount / raffle.ticketPrice
+            );
           } else {
             result.push({
               // Use push to add new objects to the array
               from: user,
               amount: amount,
-              ticket: Math.floor(amount / ticketPrice),
+              ticket: Math.floor(amount / raffle.ticketPrice),
             });
           }
         }
         result.sort((a, b) => b.ticket - a.ticket);
         setTokens(result);
-        setLastUpdated(moment());
       }
     } catch (e) {
       console.log(e);
     }
   }
 
-  const handleLeaderboardWalletClick = (address, index) => {
-    navigator.clipboard.writeText(address);
-    setCopiedIndex(index);
-    setTimeout(() => {
-      setCopiedIndex(-1);
-    }, 3000);
-  };
-
-  function handleChange(e) {
-    setState({ ...state, [e.target.name]: e.target.value });
-  }
-
-  const handleSearch = () => {
-    setSearchWallet(state.searchWallet);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  const handleBuyButton = () => {
-    setBuyPanelOpen(!buyPanelOpen);
-  };
-
-  const handleCopyDepositAddressButton = () => {
-    navigator.clipboard.writeText(userAddress);
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 3000);
-  };
-
   return (
     <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray w-max py-2 px-2">
-          <img
-            className="rounded-lg w-72 h-72"
-            src="https://ordinals.com/content/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0"
-          ></img>
-          <div className="flex justify-center mt-2">
-            <button
-              className="text-lg bg-defaultGray border-lightGray px-[16px] py-[10px] w-72 h-14"
-              onClick={() =>
-                window.open(
-                  "https://ordinals.com/inscription/adebf9b98d0f4cc8f48b211655f548fb662d3cff7a630359e1fffb0c60275800i0",
-                  "_blank"
-                )
-              }
-            >
-              View Inscription
-            </button>
-          </div>
-        </div>
+        <ViewInscription />
 
         <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
           <div>
@@ -170,263 +90,9 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3">
-        <div className="col-span-1 rounded-lg flex flex-col border bg-darkGray w-72 h-[262px]">
-          <div className="px-[24px] py-[12px] h-14 border border-b-2 border-x-0 border-y-0 bg-defaultGray border-lightGray rounded-t-lg">
-            <h1 className="text-lg font-semibold">Inscription Details</h1>
-          </div>
-          <ul className="text-sm">
-            <li className="py-4 px-6 flex justify-between">
-              <h5>ID</h5>
-              <p>1119</p>
-            </li>
-            <li className="py-4 px-6 flex justify-between">
-              <h5>Number</h5>
-              <p>1119</p>
-            </li>
-            <li className="py-4 px-6 flex justify-between">
-              <h5>Owner</h5>
-              <p>0x...C544</p>
-            </li>
-            <li className="py-4 px-6 flex justify-between">
-              <h5>Set Rarity</h5>
-              <p>5%</p>
-            </li>
-          </ul>
-        </div>
-        {buyPanelOpen ? (
-          <div className="rounded-lg p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
-            <div className="flex justify-between">
-              <h1 className="text-3xl">BTC Annons | Artefacts</h1>
-              <h1
-                className="bg-inherit text-3xl cursor-pointer"
-                onClick={handleBuyButton}
-              >
-                X
-              </h1>
-            </div>
-            <div className="w-full h-0.5 bg-gray-300"></div>
-            <div className="grid grid-cols-2">
-              <div>
-                <p className="text-base">Price per ticket</p>
-                <h2 className="text-3xl">{ticketPrice} PSAT</h2>
-              </div>
-              <div>
-                <p className="text-base">Select amount</p>
-                <h2 className="text-3xl ">1-1000</h2>
-              </div>
-              <div className="flex justify-center items-center" role="group">
-                <div className="flex items-center rounded-lg text-lg border-4 border-lightGray bg-darkGray">
-                  <button
-                    className="px-6 py-2 text-5xl text-white rounded-r-none bg-inherit"
-                    onClick={() =>
-                      setBuyTicketAmount((prevAmount) =>
-                        Math.max(prevAmount - 1, minTicketAmount)
-                      )
-                    }
-                  >
-                    -
-                  </button>
-                  <input
-                    className="w-20 px-2 py-2 text-center bg-inherit text-xl"
-                    type="text"
-                    min="1"
-                    max="1000"
-                    value={buyTicketAmount}
-                    placeholder="1"
-                    onChange={(e) => setBuyTicketAmount(e.target.value)}
-                  />
-                  <button
-                    className="px-4 py-2 text-5xl text-white rounded-r rounded-l-none bg-inherit"
-                    onClick={() =>
-                      setBuyTicketAmount((prevAmount) =>
-                        Math.min(prevAmount + 1, maxTicketAmount)
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div>
-                <p className="text-base">Deposit Address</p>
-                <textarea
-                  className="w-full h-24 text-base bg-defaultGray border-4 inline-block border-lightGray resize-none text-start"
-                  value={
-                    "bc1p0kh6z4fdakldgjladfnmglvkfjddfasdfsdfgs564blkfg0masdlfh"
-                  }
-                ></textarea>
-                <button
-                  className={
-                    isCopied
-                      ? "text-orange-500 text-lg bg-darkerLightGray border-lightGray"
-                      : "text-lg bg-darkerLightGray border-lightGray"
-                  }
-                  onClick={handleCopyDepositAddressButton}
-                >
-                  {isCopied ? "Copied to clipboard" : "Copy Address"}
-                </button>
-              </div>
-              <div>
-                <p className="text-base">Total cost</p>
-                <h2 className="text-3xl">
-                  {buyTicketAmount * ticketPrice} PSAT
-                </h2>
-              </div>
-            </div>
-            <div className="w-full h-0.5 bg-gray-300"></div>
-            <div className="flex flex-col">
-              <div className="text-base">
-                <p>
-                  Deposit the amount shown in “Total cost” to the deposit
-                  address to enter the draw. Please note this deposit is
-                  <span className="font-semibold"> NON-REFUNDABLE.</span> For a
-                  more in-depth guide,{" "}
-                  <a className="cursor-pointer underline text-white hover:text-gray-400">
-                    read here
-                  </a>
-                </p>
-              </div>
-              <div>
-                <p>
-                  Once the TX is confirmed, close this window, paste your
-                  deposit wallet into the search bar and your total tickets will
-                  be shown for the draw.
-                </p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="rounded-lg w-[514px] p-[24px] flex flex-col border gap-[24px] bg-defaultGray">
-            <h1 className="text-[28px]">BTC Annons | Artefacts</h1>
-            <p className="text-base">
-              The king of $PSAT, the BitGod21 Annon onboarded masses in their
-              thousands to the Ordinals Ecosystem. He is a treasured artefact
-              inscribed into a treasured sat.
-            </p>
-            <div className="w-full h-0.5 bg-gray-300"></div>
-            <div className="grid grid-cols-2">
-              <div>
-                <p className="text-base">Price per ticket</p>
-                <h2 className="text-3xl">100 PSAT</h2>
-              </div>
-              <div>
-                <p className="text-base">Tickets purchased</p>
-                <h2 className="text-3xl">
-                  {tokens.length > 0 &&
-                    tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)}
-                </h2>
-              </div>
-            </div>
-            <div className="w-full h-0.5 bg-gray-300"></div>
-            <div className="grid grid-cols-2">
-              <div>
-                <p className="text-base">Raffle ends in:</p>
-                <CountdownTimer />
-              </div>
-              <div>
-                <button
-                  className="text-lg bg-darkerLightGray border-lightGray"
-                  onClick={handleBuyButton}
-                >
-                  Buy tickets
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border bg-defaultGray">
-          <h1 className="text-3xl">Leaderboard</h1>
-
-          <div className="flex items-center justify-between">
-            <p className="text-base">Last updated: {timeDifference}</p>
-            <button onClick={getAddressDetail} className="bg-inherit">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M16.5374 17.5674C14.7844 19.0831 12.4993 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 12.1361 19.3302 14.1158 18.1892 15.7406L15 10H18C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C12.1502 18 14.1022 17.1517 15.5398 15.7716L16.5374 17.5674Z"
-                  fill="white"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div className="flex">
-            <input
-              type="text"
-              name="searchWallet"
-              className="grow rounded-lg bg-defaultGray border border-lightGray"
-              onChange={handleChange}
-              onKeyPress={handleKeyPress}
-            />
-            <button
-              className="text-lg bg-defaultGray border border-lightGray"
-              onClick={handleSearch}
-            >
-              Search
-            </button>
-          </div>
-          <div>
-            <ul className="border">
-              <li className="flex justify-between border border-b-2 border-x-0 border-y-0 p-[24px] text-lg">
-                <h5>Wallet</h5>
-                <h5>Tickets</h5>
-              </li>
-              <div className="h-40 max-h-40 overflow-y-auto">
-                {tokens.length > 0 &&
-                  tokens
-                    .filter((token) =>
-                      token.from
-                        .toLowerCase()
-                        .includes(searchWallet.toLowerCase())
-                    )
-                    .map((token, key) => (
-                      <li
-                        className="p-[24px] flex justify-between text-lg bg-darkGray border border-lightGray"
-                        key={key}
-                      >
-                        <a
-                          className="cursor-pointer text-white hover:text-gray-400"
-                          onClick={() =>
-                            handleLeaderboardWalletClick(token.from, key)
-                          }
-                        >
-                          {token.from.substring(0, 4) +
-                            "..." +
-                            token.from.substring(token.from.length - 4)}
-                        </a>
-                        <p>{token.ticket}</p>
-                        {copiedIndex === key && (
-                          <div className="absolute top-2 right-2">
-                            <div className="alert alert-success">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="stroke-current shrink-0 h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                              </svg>
-                              <span>Address Copied!</span>
-                            </div>
-                          </div>
-                        )}
-                      </li>
-                    ))}
-              </div>
-            </ul>
-          </div>
-        </div>
+        <InscriptionDetails />
+        <BuyPanel tokens={tokens} />
+        <Leaderboard tokens={tokens} getAddressDetail={getAddressDetail} />
       </div>
     </div>
   );

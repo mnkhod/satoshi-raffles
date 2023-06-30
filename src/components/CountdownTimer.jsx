@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
+import raffle from "../../raffleDetails.json";
 
 function CountdownTimer() {
   const [remainingTime, setRemainingTime] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
-    const endTime = moment(
-      "June 25th 2023, 9:44:55 pm",
-      "MMMM Do YYYY, h:mm:ss a"
-    );
+    const endTime = moment(raffle.endTime, raffle.timeFormat);
     const interval = setInterval(() => {
       const currentTime = moment();
       const duration = moment.duration(endTime.diff(currentTime));
@@ -31,9 +30,39 @@ function CountdownTimer() {
     };
   }, []);
 
+  const handleCopyWinnerAddress = () => {
+    navigator.clipboard.writeText(raffle.winner);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 3000);
+  };
+
   return (
     <div>
-      <p className="text-3xl">{remainingTime}</p>
+      {raffle.winner.length > 0 ? (
+        <div className="relative">
+          {isCopied && (
+            <p className="absolute border rounded-md ml-10 mt-[-30px]">
+              Copied!
+            </p>
+          )}
+          <p className="text-base flex-shrink-0">Winner:</p>
+          <p
+            className="text-3xl cursor-pointer"
+            onClick={handleCopyWinnerAddress}
+          >
+            {raffle.winner.substring(0, 4) +
+              "..." +
+              raffle.winner.substring(raffle.winner.length - 4)}
+          </p>
+        </div>
+      ) : (
+        <div>
+          <p className="text-base">Raffle ends in:</p>
+          <p className="text-3xl">{remainingTime}</p>
+        </div>
+      )}
     </div>
   );
 }
