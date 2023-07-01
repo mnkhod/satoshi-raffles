@@ -18,8 +18,10 @@ export default function BuyPanel({ tokens }) {
         </div>
         <div className="pb-6">
           <p className="text-base pb-2">Tickets purchased</p>
-          <h2 className="text-3xl ">
-            {raffle.minTicketAmount}-{raffle.maxTicketAmount}
+          <h2 className="text-3xl">
+            {tokens.length > 0
+              ? tokens.reduce((a, b) => a + (b["ticket"] || 0), 0)
+              : 0}
           </h2>
         </div>
         <div className="flex justify-start w-full" role="group">
