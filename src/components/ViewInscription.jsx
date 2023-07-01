@@ -8,7 +8,7 @@ export default function ViewInscription() {
 
   return (
     <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray w-full md:w-[338px] p-6">
-      <img className="rounded-lg w-[276px] h-[276px] mx-auto mb-6" src={incsriptionImageUrl}/>
+      <img className="rounded-lg w-full h-full md:w-[276px] md:h-[276px] mx-auto mb-6" src={incsriptionImageUrl}/>
       <div className="flex justify-center mt-2">
         <Button
           onClick={() => window.open(inscriptionDetailUrl, "_blank")}

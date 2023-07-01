@@ -60,7 +60,7 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
   return (
     <>
       <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border border-lightGray bg-defaultGray">
-        <h1 className="text-3xl">Leaderboard</h1>
+        <h1 className="text-3xl">Participants</h1>
 
         <div className="flex items-center justify-between">
           <p className="text-base">Last updated: {timeDifference}</p>
@@ -80,16 +80,17 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
           </button>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <input
             type="text"
             name="searchWallet"
-            className="grow rounded-lg  bg-defaultGray border focus:ring-white border-lightGray"
+            className="grow rounded-lg h-12  bg-defaultGray border focus:ring-white border-lightGray"
             onChange={handleChange}
             onKeyPress={handleKeyPress}
           />
           <Button
             onClick={handleSearch}
+            customStyle={'w-full md:w-auto'}
           >
             Search
           </Button>
