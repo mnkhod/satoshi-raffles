@@ -76,8 +76,7 @@ export default function BuyPanel({ tokens }) {
       </div>
       <div className="w-full h-0.5 bg-lightGray"></div>
       <div className="flex flex-col">
-        <p className="text-base text-lighterGray pb-2">Raffle ends in: </p>
-        <h2 className="text-3xl text-white">25H:34M:38S</h2>
+        <CountdownTimer />
       </div>
     </>
   );

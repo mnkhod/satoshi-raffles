@@ -43,13 +43,15 @@ function CountdownTimer() {
       {raffle.winner.length > 0 ? (
         <div className="relative">
           {isCopied && (
-            <p className="absolute border rounded-md ml-10 mt-[-30px]">
+            <p className="absolute border rounded-md ml-10 mt-[-30px] bg-darkGray">
               Copied!
             </p>
           )}
-          <p className="text-base flex-shrink-0">Winner:</p>
+          <p className="text-base flex-shrink-0 text-lighterGray pb-2">
+            Winner:
+          </p>
           <p
-            className="text-3xl cursor-pointer"
+            className="text-3xl text-white cursor-pointer"
             onClick={handleCopyWinnerAddress}
           >
             {raffle.winner.substring(0, 4) +
