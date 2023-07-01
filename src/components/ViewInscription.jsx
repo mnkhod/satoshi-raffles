@@ -1,4 +1,5 @@
 import raffle from "../../raffleDetails.json";
+import Button from "./Button";
 
 export default function ViewInscription() {
   const inscriptionDetailUrl = `https://ordinals.com/inscription/${raffle.prize.id}`;
@@ -6,16 +7,17 @@ export default function ViewInscription() {
   const incsriptionPreviewUrl = `https://ordinals.com/preview/${raffle.prize.id}`;
 
   return (
-    <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray w-max py-2 px-2">
-      <img className="rounded-lg w-72 h-72" src={incsriptionImageUrl}></img>
+    <div className="rounded-lg order-2 md:order-1 border bg-defaultGray border-lightGray w-full md:w-[338px] p-6">
+      <img className="rounded-lg w-[276px] h-[276px] mx-auto mb-6" src={incsriptionImageUrl}/>
       <div className="flex justify-center mt-2">
-        <button
-          className="text-lg bg-defaultGray border-lightGray px-[16px] py-[10px] w-72 h-14"
+        <Button
           onClick={() => window.open(inscriptionDetailUrl, "_blank")}
-        >
+          customStyle={'w-72'}
+      >
           View Inscription
-        </button>
+        </Button>
       </div>
+
     </div>
   );
 }

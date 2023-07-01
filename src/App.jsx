@@ -56,8 +56,10 @@ function App() {
   }
 
   return (
-    <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+    <div className="max-w-7xl mx-auto">
+
+    <div className="py-[48px] md:py-[64px] px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
+      <div className="flex md:flex-row flex-col gap-6">
         <ViewInscription />
 
         <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
@@ -81,19 +83,24 @@ function App() {
                 can paste your wallet into the search bar under the leaderboard
                 to show total tickets in your account.
               </p>
-              <p className="text-base ">
-                For more detailed instructions, take a look at our guide.
+              <p className="text-base       ">
+                For more detailed instructions,{' '}
+                <span className="underline">
+
+                take a look at our guide.
+                </span>
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="flex flex-col md:flex-row gap-6">
         <InscriptionDetails />
         <BuyPanel tokens={tokens} />
         <Leaderboard tokens={tokens} getAddressDetail={getAddressDetail} />
       </div>
+    </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import raffle from "../../raffleDetails.json";
 import moment from "moment";
+import Button from "./Button";
 
 export default function Leaderboard({ tokens, getAddressDetail }) {
   const [lastUpdated, setLastUpdated] = useState(moment());
@@ -55,14 +56,15 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
     setLastUpdated(moment());
   };
 
+
   return (
     <>
-      <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border bg-defaultGray">
+      <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border border-lightGray bg-defaultGray">
         <h1 className="text-3xl">Leaderboard</h1>
 
         <div className="flex items-center justify-between">
           <p className="text-base">Last updated: {timeDifference}</p>
-          <button onClick={handleRefreshButtonClick} className="bg-inherit">
+          <button onClick={handleRefreshButtonClick} className="bg-inherit p-0">
             <svg
               width="20"
               height="20"
@@ -78,28 +80,27 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
           </button>
         </div>
 
-        <div className="flex">
+        <div className="flex gap-4">
           <input
             type="text"
             name="searchWallet"
-            className="grow rounded-lg bg-defaultGray border border-lightGray"
+            className="grow rounded-lg  bg-defaultGray border focus:ring-white border-lightGray"
             onChange={handleChange}
             onKeyPress={handleKeyPress}
           />
-          <button
-            className="text-lg bg-defaultGray border border-lightGray"
+          <Button
             onClick={handleSearch}
           >
             Search
-          </button>
+          </Button>
         </div>
         <div>
-          <ul className="border">
-            <li className="flex justify-between border border-b-2 border-x-0 border-y-0 p-[24px] text-lg">
+          <div className="border border-lightGray flex flex-col divide-y-2 divide-lightGray rounded-lg">
+            <div className="flex justify-between text-white px-6 py-4 text-lg">
               <h5>Wallet</h5>
               <h5>Tickets</h5>
-            </li>
-            <div className="h-40 max-h-40 overflow-y-auto">
+            </div>
+            <div className="h-[270px] overflow-y-auto">
               {tokens.length > 0 &&
                 tokens
                   .filter((token) =>
@@ -109,11 +110,11 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
                   )
                   .map((token, key) => (
                     <li
-                      className="p-[24px] flex justify-between text-lg bg-darkGray border border-lightGray"
+                      className="px-6 py-1 flex justify-between text-lg bg-darkGray border border-lightGray "
                       key={key}
                     >
                       <a
-                        className="cursor-pointer text-white hover:text-gray-400"
+                        className="cursor-pointer text-lighterGray hover:text-gray-400"
                         onClick={() =>
                           handleLeaderboardWalletClick(token.from, key)
                         }
@@ -146,7 +147,7 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
                     </li>
                   ))}
             </div>
-          </ul>
+          </div>
         </div>
       </div>
     </>
