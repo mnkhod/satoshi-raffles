@@ -59,8 +59,8 @@ function CountdownTimer() {
         </div>
       ) : (
         <div>
-          <p className="text-base">Raffle ends in:</p>
-          <p className="text-3xl">{remainingTime}</p>
+          <p className="text-base text-lighterGray pb-2">Raffle ends in:</p>
+          <p className="text-3xl text-white">{remainingTime}</p>
         </div>
       )}
     </div>
