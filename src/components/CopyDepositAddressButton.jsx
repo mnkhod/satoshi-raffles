@@ -27,11 +27,13 @@ export default function CopyDepositAddressButton() {
   return (
     <div>
       <button
-        className={
-          isCopyDepositAddressButtonPressed
-            ? "text-lg bg-darkerLightGray border-lightGray"
-            : "text-lg bg-lighterDarkGray border-lightGray"
-        }
+    className={
+      `text-base w-full hover:bg-darkerLightGray hover:border-lightGray ` +
+      (isCopyDepositAddressButtonPressed
+        ? "bg-darkerLightGray border-lightGray"
+        : "bg-defaultGray border-lightGray")
+    }
+
         onClick={handleCopyDepositAddressButton}
         onMouseDown={handleCopyDepositAddressButtonDown}
         onMouseUp={handleCopyDepositAddressButtonUp}

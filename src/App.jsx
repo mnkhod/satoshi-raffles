@@ -56,21 +56,22 @@ function App() {
   }
 
   return (
-    <div className="py-[48px] md:py-0 px-[40px] w-full grid grid-cols-1 gap-[24px] justify-start items-center">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+    <div className="max-w-7xl mx-auto">
+
+    <div className="py-[48px] md:py-[64px] px-4 md:px-[40px] w-full grid grid-cols-1 gap-8 justify-start items-center">
+      <div className="flex md:flex-row flex-col gap-9">
         <ViewInscription />
 
-        <div className="order-1 md:order-2 flex flex-col gap-3 col-span-2">
+        <div className="order-1 md:order-2 flex flex-col gap-6 col-span-2">
           <div>
-            <span className="text-5xl text-orange-500 font-semibold">
+            <h1 className="text-5xl text-orange-500 font-semibold mb-6">
               Satoshi Pit
-            </span>
-            <span className="text-[48px] text-orange-500"> Beta</span>
-          </div>
-          <p className="text-base">
+            </h1> <p className="text-base">
             A place to partake in the raffles of unique and abstract Ordinal
             Artefacts, powered by BRC20.
           </p>
+
+          </div>
           <div>
             <div className="flex flex-col gap-3">
               <h2 className="text-3xl">How to enter</h2>
@@ -81,19 +82,24 @@ function App() {
                 can paste your wallet into the search bar under the leaderboard
                 to show total tickets in your account.
               </p>
-              <p className="text-base ">
-                For more detailed instructions, take a look at our guide.
+              <p className="text-base       ">
+                For more detailed instructions,{' '}
+                <span className="underline">
+
+                take a look at our guide.
+                </span>
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="flex flex-col md:flex-row gap-8">
         <InscriptionDetails />
         <BuyPanel tokens={tokens} />
         <Leaderboard tokens={tokens} getAddressDetail={getAddressDetail} />
       </div>
+    </div>
     </div>
   );
 }
