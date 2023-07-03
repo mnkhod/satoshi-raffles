@@ -7,28 +7,20 @@ function CountdownTimer() {
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
-    const endTime = moment(raffle.endTime, raffle.timeFormat);
     const interval = setInterval(() => {
-      const currentTime = moment();
-      const duration = moment.duration(endTime.diff(currentTime));
-      const totalHours = Math.floor(duration.asHours());
-      const hours = (totalHours % 24).toString().padStart(2, "0");
-      const minutes = duration.minutes().toString().padStart(2, "0");
-      const seconds = duration.seconds().toString().padStart(2, "0");
+      let start = moment();
+      let end = moment(raffle.endTime, raffle.timeFormat);
 
-      let start = moment()
-      let end = moment(raffle.endTime,raffle.timeFormat)
+      let diff = end.diff(start);
+      let diffTime = moment(diff);
 
-      let diff = end.diff(start)
-      let diffTime = moment(diff)
-      console.log(diffTime.format("D[D] : H[H] : m[M] : s[S]"))
+      const duration = moment.duration(end.diff(start));
 
       if (duration.asMilliseconds() <= 0) {
         clearInterval(interval);
         setRemainingTime("Countdown Ended");
       } else {
-        const formattedCountdown = `${hours}H : ${minutes}M : ${seconds}S`;
-        setRemainingTime(formattedCountdown);
+        setRemainingTime(diffTime.format("D[D] : H[H] : m[M] : s[S]"));
       }
     }, 1000);
 
