@@ -2,7 +2,7 @@ import raffle from "../../raffleDetails.json";
 
 export default function InscriptionDetails() {
   return (
-    <div className="border bg-defaultGray rounded-lg border-lightGray w-full md:w-[348px] ">
+    <div className="border bg-defaultGray rounded-lg border-lightGray w-full md:w-[324px] ">
       <div className="p-6 flex flex-col divide-y-2 divide-lightGray gap-6 w-full h-auto">
         <div className=" ">
           <h1 className="text-3xl ">Inscription Details</h1>

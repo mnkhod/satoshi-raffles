@@ -56,7 +56,7 @@ function App() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-[1400px] mx-auto">
       <div className="py-[48px] md:py-[64px] px-4 md:px-[40px] w-full grid grid-cols-1 gap-8 justify-start items-center">
         <div className="flex md:flex-row flex-col gap-9">
           <ViewInscription />

@@ -3,7 +3,7 @@ export default function InfoSection() {
     <div className="order-1 md:order-2 flex flex-col gap-6 col-span-2">
       <div>
         <h1 className="text-5xl text-orange-500 font-semibold mb-6">
-          Satoshi Pit
+          Satoshi Raffle
         </h1>{" "}
         <p className="text-base">
           A place to partake in the raffles of unique and abstract Ordinal
