@@ -28,7 +28,7 @@ export default function BuyPanel({ tokens }) {
           <div className="flex flex-col w-full md:w-auto">
             <p className="text-base pb-2">Select amount</p>
             <div className="flex items-center px-5 py-2 rounded-lg  text-lg border border-lightGray bg-darkGray ">
-              <div className="w-full md:w-auto flex justify-between px-6 md:px-0">
+              <div className="w-full flex justify-between px-6 md:px-0">
                 <button
                   className=" text-3xl p-0 text-white rounded-r-none bg-inherit"
                   onClick={() =>
@@ -40,9 +40,10 @@ export default function BuyPanel({ tokens }) {
                   -
                 </button>
                 <input
-                  className="w-20 text-center bg-inherit text-2xl"
+                  className="w-20 focus:border-none text-center bg-inherit text-2xl"
                   type="text"
                   min="1"
+                  readOnly
                   max="1000"
                   value={buyTicketAmount}
                   placeholder="1"
@@ -87,7 +88,7 @@ export default function BuyPanel({ tokens }) {
     <>
       <div className="rounded-lg w-full md:w-[514px] p-[24px] flex flex-col border border-lightGray gap-[24px] bg-defaultGray">
         <div className="flex justify-between">
-          <h1 className="text-3xl">BTC Annons | Artefacts</h1>
+          <h1 className="text-3xl">Join the Raffle</h1>
         </div>
 
         {renderBuyPanel()}
