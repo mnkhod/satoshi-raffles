@@ -16,6 +16,13 @@ function CountdownTimer() {
       const minutes = duration.minutes().toString().padStart(2, "0");
       const seconds = duration.seconds().toString().padStart(2, "0");
 
+      let start = moment()
+      let end = moment(raffle.endTime,raffle.timeFormat)
+
+      let diff = end.diff(start)
+      let diffTime = moment(diff)
+      console.log(diffTime.format("D[D] : H[H] : m[M] : s[S]"))
+
       if (duration.asMilliseconds() <= 0) {
         clearInterval(interval);
         setRemainingTime("Countdown Ended");
