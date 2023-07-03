@@ -20,10 +20,6 @@ export default function InfoSection() {
             your wallet into the search bar under the leaderboard to show total
             tickets in your account.
           </p>
-          <p className="text-base">
-            For more detailed instructions,{" "}
-            <span className="underline">take a look at our guide.</span>
-          </p>
         </div>
       </div>
     </div>
