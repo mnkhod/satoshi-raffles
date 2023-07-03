@@ -4,9 +4,9 @@
   "ticketPrice": 1000,
   "minTicketAmount": 1,
   "maxTicketAmount": 1000,
-  "winner": "",
-  "startTime": "July 4th 2023, 00:00:00 GMT+0000",
-  "endTime": "July 14 2023 00:00:00 GMT+0000",
+  "winner": "asdasdasd",
+  "startTime": "July 4th 2023, 00:00:00 GMT+0800",
+  "endTime": "July 15 2023 08:00:00 GMT+0800",
   "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
   "prize": {
     "name": "Satoshi Punk #23",
