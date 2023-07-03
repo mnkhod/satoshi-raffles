@@ -5,9 +5,9 @@
   "minTicketAmount": 1,
   "maxTicketAmount": 1000,
   "winner": "",
-  "startTime": "July 3th 2023, 12:00:00 am",
-  "endTime": "July 20th 2023, 11:00:00 am",
-  "timeFormat": "MMMM Do YYYY, h:mm:ss a",
+  "startTime": "July 4th 2023, 00:00:00 GMT+0000",
+  "endTime": "July 14 2023 00:00:00 GMT+0000",
+  "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
   "prize": {
     "name": "Satoshi Punk #23",
     "description": "Satoshi Punks are here to shake things up. Each Punks is crafted with love and passion, pixel by pixel, to help you express yourself. If you're a punk at heart, who is tired of the same old same old, the join our tribe. Let's admire our JPEGs together and create cool stuff.",

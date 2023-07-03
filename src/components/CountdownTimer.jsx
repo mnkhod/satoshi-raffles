@@ -20,7 +20,7 @@ function CountdownTimer() {
         clearInterval(interval);
         setRemainingTime("Countdown Ended");
       } else {
-        setRemainingTime(diffTime.format("D[D] : H[H] : m[M] : s[S]"));
+        setRemainingTime(diffTime.format("D[D] : HH[H] : mm[M] : ss[S]"));
       }
     }, 1000);
 
