@@ -11,16 +11,21 @@ function CountdownTimer() {
       let start = moment();
       let end = moment(raffle.endTime, raffle.timeFormat);
 
-      let diff = end.diff(start);
-      let diffTime = moment(diff);
-
       const duration = moment.duration(end.diff(start));
+
+      const totalDays = Math.floor(duration.asDays());
+      const totalHours = Math.floor(duration.asHours());
+      const hours = (totalHours % 24).toString().padStart(2, "0");
+      const minutes = duration.minutes().toString().padStart(2, "0");
+      const seconds = duration.seconds().toString().padStart(2, "0");
+
+      const formattedCountdown = `${totalDays}D : ${hours}H : ${minutes}M : ${seconds}S`;
 
       if (duration.asMilliseconds() <= 0) {
         clearInterval(interval);
         setRemainingTime("Countdown Ended");
       } else {
-        setRemainingTime(diffTime.format("D[D] : HH[H] : mm[M] : ss[S]"));
+        setRemainingTime(formattedCountdown);
       }
     }, 1000);
 
