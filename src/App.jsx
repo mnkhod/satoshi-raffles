@@ -31,7 +31,7 @@ function App() {
         let result = [];
         let endTime = moment(raffle.startTime, raffle.timeFormat);
         for (let i = 0; i < resultTransfers.length; i++) {
-          if (resultTransfers[i].blocktime > endTime.unix()) continue;
+          if (resultTransfers[i].blocktime < endTime.unix()) continue;
           let user = resultTransfers[i].from;
           let amount = parseInt(resultTransfers[i].amount);
           let userExists = result.find((obj) => obj.from === user);
