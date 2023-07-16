@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import moment from "moment";
 
 import InscriptionDetails from "./components/InscriptionDetails";
 import ViewInscription from "./components/ViewInscription";
@@ -28,8 +29,9 @@ function App() {
         let tokenData = response.data.data;
         let resultTransfers = tokenData.detail;
         let result = [];
+        let endTime = moment(raffle.startTime, raffle.timeFormat);
         for (let i = 0; i < resultTransfers.length; i++) {
-          // if (resultTransfers.blocktime < startBlock) continue;
+          if (resultTransfers[i].blocktime > endTime.unix()) continue;
           let user = resultTransfers[i].from;
           let amount = parseInt(resultTransfers[i].amount);
           let userExists = result.find((obj) => obj.from === user);
