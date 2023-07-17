@@ -83,7 +83,7 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
           <input
             type="text"
             name="searchWallet"
-            className="pl-3 grow rounded-lg h-12  bg-defaultGray border focus:ring-white border-lightGray focus:outline-none"
+            className="pl-3 grow rounded-md h-12  bg-defaultGray border focus:ring-white border-lightGray focus:outline-none focus:border-2"
             onChange={handleChange}
             onKeyPress={handleKeyPress}
           />
