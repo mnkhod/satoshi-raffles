@@ -56,7 +56,6 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
     setLastUpdated(moment());
   };
 
-
   return (
     <>
       <div className="rounded-lg flex flex-col gap-[24px] p-[24px] border border-lightGray bg-defaultGray">
@@ -84,14 +83,11 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
           <input
             type="text"
             name="searchWallet"
-            className="pl-3 grow rounded-lg h-12  bg-defaultGray border focus:ring-white border-lightGray"
+            className="pl-3 grow rounded-lg h-12  bg-defaultGray border focus:ring-white border-lightGray focus:outline-none"
             onChange={handleChange}
             onKeyPress={handleKeyPress}
           />
-          <Button
-            onClick={handleSearch}
-            customStyle={'w-full md:w-auto'}
-          >
+          <Button onClick={handleSearch} customStyle={"w-full md:w-auto"}>
             Search
           </Button>
         </div>
