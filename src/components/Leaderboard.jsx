@@ -90,9 +90,12 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
             onChange={handleChange}
             onKeyPress={handleKeyPress}
           />
-          <Button onClick={handleSearch} customStyle={"w-full md:w-auto"}>
+          <button
+            className="text-base bg-defaultGray border-lightGray px-[16px] py-[12px] h-[48px] w-full md:w-auto hover:bg-darkerLightGray hover:border-lightGray"
+            onClick={handleSearch}
+          >
             Search
-          </Button>
+          </button>
         </div>
         <div>
           <div className="border border-lightGray flex flex-col divide-y-2 divide-lightGray rounded-lg">
