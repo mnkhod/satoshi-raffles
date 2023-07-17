@@ -27,10 +27,10 @@ export default function BuyPanel({ tokens }) {
         <div className="flex justify-start w-full" role="group">
           <div className="flex flex-col w-full md:w-auto">
             <p className="text-base pb-2">Select amount</p>
-            <div className="flex items-center px-5 py-2 rounded-lg  text-lg border border-lightGray bg-darkGray ">
+            <div className="flex items-center px-5 py-2 rounded-lg text-lg border border-lightGray bg-darkGray">
               <div className="w-full flex justify-between px-6 md:px-0">
                 <button
-                  className=" text-3xl p-0 text-white rounded-r-none bg-inherit"
+                  className="text-3xl p-0 text-white rounded-r-none bg-inherit border-none"
                   onClick={() =>
                     setBuyTicketAmount((prevAmount) =>
                       Math.max(prevAmount - 1, raffle.minTicketAmount)
@@ -40,7 +40,7 @@ export default function BuyPanel({ tokens }) {
                   -
                 </button>
                 <input
-                  className="w-20 focus:border-none text-center bg-inherit text-2xl"
+                  className="w-20 focus:border-none text-center bg-inherit text-2xl focus:outline-none"
                   type="text"
                   min="1"
                   readOnly
@@ -50,7 +50,7 @@ export default function BuyPanel({ tokens }) {
                   onChange={(e) => setBuyTicketAmount(e.target.value)}
                 />
                 <button
-                  className=" text-3xl p-0 text-white rounded-r rounded-l-none bg-inherit"
+                  className=" text-3xl p-0 text-white rounded-r rounded-l-none bg-inherit border-none"
                   onClick={() =>
                     setBuyTicketAmount((prevAmount) =>
                       Math.min(prevAmount + 1, raffle.maxTicketAmount)
