@@ -2,9 +2,19 @@ import { useEffect, useState } from "react";
 import raffle from "../../raffleDetails.json";
 import CountdownTimer from "./CountdownTimer";
 import CopyDepositAddressButton from "./CopyDepositAddressButton";
+import moment from "moment";
 
 export default function BuyPanel({ tokens }) {
   const [buyTicketAmount, setBuyTicketAmount] = useState(1);
+  const [raffleEnded, setRaffleEnded] = useState(false);
+
+  useEffect(() => {
+    const endTime = moment(raffle.endTime, raffle.timeFormat);
+    const currentTime = moment();
+    if (currentTime.unix() > endTime.unix()) {
+      setRaffleEnded(true);
+    }
+  }, []);
 
   const renderBuyPanel = () => (
     <>
@@ -71,14 +81,17 @@ export default function BuyPanel({ tokens }) {
             </div>
           </div>
         </div>
-        <div>
-          <p className="text-base text-lighterGray pb-2">Deposit Address</p>
-          <p className="w-full select-all text-base bg-defaultGray break-all inline-block text-start pb-6">
-            {raffle.userAddress}
-          </p>
-          <CopyDepositAddressButton />
-        </div>
+        {!raffleEnded && (
+          <div>
+            <p className="text-base text-lighterGray pb-2">Deposit Address</p>
+            <p className="w-full select-all text-base bg-defaultGray break-all inline-block text-start pb-6">
+              {raffle.userAddress}
+            </p>
+            <CopyDepositAddressButton />
+          </div>
+        )}
       </div>
+
       <div className="w-full h-0.5 bg-lightGray"></div>
       <div className="flex flex-col">
         <CountdownTimer />
