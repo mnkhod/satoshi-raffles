@@ -50,7 +50,7 @@ export default function BuyPanel({ tokens }) {
                   onChange={(e) => setBuyTicketAmount(e.target.value)}
                 />
                 <button
-                  className=" text-3xl p-0 text-white rounded-r rounded-l-none bg-inherit border-none"
+                  className="text-3xl p-0 text-white rounded-r rounded-l-none bg-inherit border-none"
                   onClick={() =>
                     setBuyTicketAmount((prevAmount) =>
                       Math.min(prevAmount + 1, raffle.maxTicketAmount)

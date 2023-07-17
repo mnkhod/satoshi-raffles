@@ -63,7 +63,10 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
 
         <div className="flex items-center justify-between">
           <p className="text-base">Last updated: {timeDifference}</p>
-          <button onClick={handleRefreshButtonClick} className="bg-inherit p-0">
+          <button
+            onClick={handleRefreshButtonClick}
+            className="bg-inherit p-0 border-none"
+          >
             <svg
               width="20"
               height="20"
