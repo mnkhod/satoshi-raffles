@@ -1,5 +1,6 @@
 import React from "react";
 import logoType from "../../public/logoType.svg";
+import transparentLogo from "../../public/transparentLogo.png";
 import twitterIcon from "../../public/twitterIcon.svg";
 import discordIcon from "../../public/discordIcon.svg";
 
@@ -11,7 +12,7 @@ const Navbar = () => {
           <div className="flex items-center h-12">
             <img
               className="h-8 w-8 cursor-pointer"
-              src="../../public/transparentBGLogo.png"
+              src={transparentLogo}
               alt="Logo"
               onClick={() => {
                 window.location.href = "https://www.satoshipunks.art/";
