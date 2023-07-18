@@ -4,7 +4,7 @@
   "ticketPrice": 1000,
   "minTicketAmount": 1,
   "maxTicketAmount": 1000,
-  "winner": "",
+  "winner": "bc1pdwe8muxk05k2h4zdtpaz6rn7a4a00l65fms0n5uztusahzeq5aqqtzmq8q",
   "startTime": "July 4th 2023, 00:00:00 GMT+0800",
   "endTime": "July 17 2023 00:00:00 GMT+0800",
   "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
