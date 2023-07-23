@@ -6,13 +6,7 @@ export default function InscriptionDetails() {
       <div className="p-6 flex flex-col divide-y-2 divide-lightGray gap-6 w-full h-auto">
         <div className=" ">
           <h1 className="text-3xl ">Inscription Details</h1>
-          <p className="text-base pt-6">
-            Satoshi Punks are here to shake things up. Each Punks is crafted
-            with love and passion, pixel by pixel, to help you express yourself.
-            If you`&apos;re a punk at heart, who is tired of the same old same
-            old, the join our tribe. Let`&apos;s admire our JPEGs together and
-            create cool stuff.
-          </p>
+          <p className="text-base pt-6">{raffle.prize.description}</p>
         </div>
         <div className="text-base flex flex-col gap-6 pt-6">
           <div className="flex justify-between">
@@ -44,12 +38,10 @@ export default function InscriptionDetails() {
             <h5>Number</h5>
             <p>{raffle.prize.number}</p>
           </div>
-          {
-            /* <div className="py-4 px-6 flex justify-between">
+          {/* <div className="py-4 px-6 flex justify-between">
                 <h5>Owner</h5>
                 <p>0x...C544</p>
-              </div> */
-          }
+              </div> */}
           <div className=" flex justify-between">
             <h5>Sat Rarity</h5>
             <p>{raffle.prize.rarity}</p>

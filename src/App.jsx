@@ -32,8 +32,13 @@ function App() {
         let resultTransfers = tokenData.detail;
         let result = [];
         let endTime = moment(raffle.endTime, raffle.timeFormat);
+        // let startTime = moment(raffle.startTime, raffle.timeFormat);
         for (let i = 0; i < resultTransfers.length; i++) {
-          if (endTime.unix() < resultTransfers[i].blocktime) continue;
+          if (
+            endTime.unix() < resultTransfers[i].blocktime
+            // || startTime.unix() > resultTransfers[i].blocktime
+          )
+            continue;
           let user = resultTransfers[i].from;
           let amount = parseInt(resultTransfers[i].amount);
           let userExists = result.find((obj) => obj.from === user);

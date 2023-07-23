@@ -6,13 +6,13 @@ import moment from "moment";
 
 export default function BuyPanel({ tokens }) {
   const [buyTicketAmount, setBuyTicketAmount] = useState(1);
-  const [raffleEnded, setRaffleEnded] = useState(false);
+  const [raffleActive, setRaffleActive] = useState(false);
 
   useEffect(() => {
     const endTime = moment(raffle.endTime, raffle.timeFormat);
     const currentTime = moment();
-    if (currentTime.unix() > endTime.unix()) {
-      setRaffleEnded(true);
+    if (currentTime.isBefore(endTime)) {
+      setRaffleActive(true);
     }
   }, []);
 
@@ -38,7 +38,7 @@ export default function BuyPanel({ tokens }) {
           <div className="flex flex-col w-full md:w-auto">
             <p className="text-base pb-2">Select amount</p>
             <div className="group">
-              <div className="flex items-center px-5 py-2 rounded-lg text-lg border border-lightGray bg-darkGray peer focus-within:border-2">
+              <div className="flex items-center px-5 py-2 rounded-lg text-lg border border-lightGray bg-darkGray peer focus-within:border-[#D6D6D6]">
                 <div className="w-full flex justify-between px-6 md:px-0">
                   <button
                     className="text-3xl p-0 text-white rounded-r-none bg-inherit border-none"
@@ -81,7 +81,7 @@ export default function BuyPanel({ tokens }) {
             </div>
           </div>
         </div>
-        {!raffleEnded && (
+        {raffleActive && (
           <div>
             <p className="text-base text-lighterGray pb-2">Deposit Address</p>
             <p className="w-full select-all text-base bg-defaultGray break-all inline-block text-start pb-6">

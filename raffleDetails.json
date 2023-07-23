@@ -1,19 +1,19 @@
 {
-  "userAddress": "bc1pkugysr2cspmxpj62cna6jce69yutqaq9nsqmurpe2pucy6fyam2qk72ef6",
+  "userAddress": "bc1pesjg2k0n69dxvk0qvkr7c3h4s2jupfrvhkfu0ufk6p2h2zdl2qcq754tf0",
   "tokenTicker": "PSAT",
   "ticketPrice": 1000,
   "minTicketAmount": 1,
   "maxTicketAmount": 1000,
-  "winner": "bc1pdwe8muxk05k2h4zdtpaz6rn7a4a00l65fms0n5uztusahzeq5aqqtzmq8q",
-  "startTime": "July 4th 2023, 00:00:00 GMT+0800",
-  "endTime": "July 17 2023 00:00:00 GMT+0800",
+  "winner": "",
+  "startTime": "July 24 2023, 00:00:00 GMT+0800",
+  "endTime": "July 31 2023 00:00:00 GMT+0800",
   "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
   "prize": {
-    "name": "Satoshi Punk #23",
-    "description": "Satoshi Punks are here to shake things up. Each Punks is crafted with love and passion, pixel by pixel, to help you express yourself. If you're a punk at heart, who is tired of the same old same old, the join our tribe. Let's admire our JPEGs together and create cool stuff.",
-    "id": "aba9c4a38e0ed709c9595e1676e18c776888d23ca6079e5286fb0beba40aa980i0",
-    "number": 64442,
-    "rarity": "Common",
-    "satributes": ["Block 78", " Hal"]
+    "name": "Uncommon Guys #075",
+    "description": "Uncommon Guys are PFP collection inscribed on uncommon sats All 1/1 design, so we inscribed the 1/1 Satoshi Punk with Uncommon sats.",
+    "id": "14bf27618b9b0489d7894a0407066ac3cd9ae3162adcc150dc8b549cbbcc0448i0",
+    "number": 14493587,
+    "rarity": "Uncommon",
+    "satributes": ["Uncommon"]
   }
 }
