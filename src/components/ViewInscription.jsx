@@ -13,12 +13,13 @@ export default function ViewInscription() {
         src={incsriptionImageUrl}
       />
       <div className="flex flex-col justify-center gap-3 mt-2">
-        <Button
+        <button
+          className="text-base bg-defaultGray border-lightGray w-full md:w-64 hover:bg-darkerLightGray hover:border-lightGray"
           onClick={() => window.open(inscriptionDetailUrl, "_blank")}
-          customStyle={"w-72"}
+          customStyle={"w-full md:w-64"}
         >
           View Inscription
-        </Button>
+        </button>
         {/* <Button
           onClick={() => window.open("https://www.satoshipunks.art/","_self")}
           customStyle={'w-72'}
