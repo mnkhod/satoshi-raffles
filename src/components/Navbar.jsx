@@ -70,12 +70,12 @@ const Navbar = () => {
                     }}
                   />
                 </div>
-                <button
+                {/* <button
                   className="text-base rounded-lg bg-darkerLightGray border-lightGray hover:bg-defaultGray hover:border-lightGray"
                   onClick={toggleConnectWallet}
                 >
                   Connect Wallet
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
