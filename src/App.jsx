@@ -15,7 +15,7 @@ import raffle from "../raffleDetails.json";
 
 function App() {
   const [tokens, setTokens] = useState([]);
-  const apiKey = process.env.VITE_OKLINK_API_KEY;
+  const apiKey = import.meta.env.VITE_OKLINK_API_KEY;
 
   useEffect(() => {
     getAddressDetail();
