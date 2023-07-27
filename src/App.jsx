@@ -25,7 +25,9 @@ function App() {
       let response = await axios({
         method: "get",
         headers: {
-          "Ok-Access-Key": import.meta.env.VITE_OKLINK_API_KEY,
+          "Ok-Access-Key": import.meta.env.DEV
+            ? import.meta.env.VITE_OKLINK_API_KEY
+            : import.meta.env.production.OKLINK_API_KEY,
         },
         url: `https://www.oklink.com/api/v5/explorer/btc/transaction-list?toAddress=${raffle.userAddress}&limit=0&token=${raffle.tokenTicker}`,
       });
