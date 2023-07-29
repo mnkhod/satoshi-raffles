@@ -113,7 +113,7 @@ export default function Leaderboard({ tokens, getAddressDetail }) {
                   )
                   .map((token, key) => (
                     <li
-                      className="px-6 py-1 flex justify-between text-lg bg-darkGray border border-lightGray "
+                      className="px-6 py-1 flex justify-between text-lg bg-darkGray border border-t-0 border-lightGray "
                       key={key}
                     >
                       <a
