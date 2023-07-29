@@ -45,7 +45,10 @@ export default function ConnectWallet({ onClose }) {
               </span>
             </div>
             <div className="flex flex-col justify-between items-center">
-              <button className="mt-5 group p-3 h-full flex flex-row items-center justify-between w-full text-white-primary text-lg font-medium">
+              <button
+                className="mt-5 group/wallet p-3 h-full flex flex-row items-center justify-between w-full text-white-primary text-lg font-medium border-lightGray hover:bg-darkerLightGray hover:border-lightGray"
+                onClick={handleXverseWalletClick}
+              >
                 <div className="flex items-center">
                   <img
                     src="https://ord.cdn.magiceden.dev/static_resources/btc-xverse-logo.png"
@@ -76,7 +79,10 @@ export default function ConnectWallet({ onClose }) {
                   </svg>
                 </div>
               </button>
-              <button className="mt-5 group p-3 h-full flex items-center justify-between w-full text-white-primary text-lg font-medium">
+              <button
+                className="mt-5 group p-3 h-full flex items-center justify-between w-full text-white-primary text-lg font-medium border-lightGray hover:bg-darkerLightGray hover:border-lightGray"
+                onClick={handleUnisatWalletClick}
+              >
                 <div className="flex items-center">
                   <img
                     src="https://creator-hub-prod.s3.us-east-2.amazonaws.com/dsadsadsadas_pfp_1678648465423.png"
@@ -107,14 +113,17 @@ export default function ConnectWallet({ onClose }) {
                   </svg>
                 </div>
               </button>
-              <button className="mt-5 group p-3 h-full flex items-center justify-between w-full text-white-primary text-lg font-medium">
+              <button
+                className="mt-5 group p-3 h-full flex items-center justify-between w-full text-white-primary text-lg font-medium border-lightGray hover:bg-darkerLightGray hover:border-lightGray"
+                onClick={handleHiroWalletClick}
+              >
                 <div className="flex items-center">
                   <img
                     src="https://creator-hub-prod.s3.us-east-2.amazonaws.com/dsasdadsadsadsadsa_pfp_1678238217021.jpeg"
                     alt="Hiro icon"
                     className="mr-3 rounded-lg"
-                    width="38"
-                    height="38"
+                    width="32"
+                    height="32"
                   />
                   <div className="flex flex-col">
                     <span>Hiro</span>
@@ -146,4 +155,28 @@ export default function ConnectWallet({ onClose }) {
       </div>
     </div>
   );
+
+  async function handleHiroWalletClick() {
+    if (window.HiroWalletProvider) {
+      const userAddresses = await window.btc?.request("getAddresses");
+      console.log(userAddresses.result.addresses[1]);
+    }
+  }
+
+  async function handleXverseWalletClick() {
+    if (window.BitcoinProvider) {
+      const userAddresses = await window.BitcoinProvider.connect(
+        "getAddresses"
+      );
+      console.log(userAddresses);
+    }
+  }
+
+  async function handleUnisatWalletClick() {
+    if (window.unisat) {
+      const userAddresses = await window.unisat?.requestAccounts();
+      const userAddress = userAddresses[0];
+      console.log(userAddress);
+    }
+  }
 }
