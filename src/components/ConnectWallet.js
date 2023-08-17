@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import raffle from "../../raffleDetails.json";
 import moment from "moment";
 
@@ -12,7 +12,7 @@ import CloseImg from "../../public/close.svg";
 
 import { getAddress, signTransaction } from "sats-connect";
 
-export default function ConnectWallet({ onClose }) {
+export default function ConnectWallet({ onClose, handleConnect }) {
   return (
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50"></div>
@@ -195,11 +195,11 @@ export default function ConnectWallet({ onClose }) {
   async function handleUnisatWalletClick() {
     if (window.unisat) {
       unisat.requestAccounts().then((accounts) => {
-        console.log(accounts[0]);
+        handleConnect(accounts[0]);
+        onClose();
       });
-      // const userAddresses = await window.unisat?.requestAccounts();
-      // const userAddress = userAddresses[0];
-      // console.log(userAddress);
+    } else {
+      window.open("https://unisat.io/", "_blank");
     }
   }
 }

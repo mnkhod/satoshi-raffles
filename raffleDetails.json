@@ -4,9 +4,9 @@
   "ticketPrice": 1000,
   "minTicketAmount": 1,
   "maxTicketAmount": 1000,
-  "winner": "bc1p9j5q79pqhsjeylauqwajndfxu6kedkrn4hrnjkv9v824twqt82cqarx6uj",
+  "winner": "",
   "startTime": "July 24 2023, 00:00:00 GMT+0800",
-  "endTime": "July 31 2023 00:00:00 GMT+0800",
+  "endTime": "August 31 2023 00:00:00 GMT+0800",
   "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
   "prize": {
     "name": "Uncommon Guys #075",
