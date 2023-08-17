@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Image from "next/image";
+
 import logoType from "../../public/logoType.svg";
 import transparentLogo from "../../public/transparentLogo.png";
 import twitterIcon from "../../public/twitterIcon.svg";
@@ -20,7 +22,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 px-8">
             <div className="flex items-center h-12">
-              <img
+              <Image
                 className="h-8 w-8 cursor-pointer"
                 src={transparentLogo}
                 alt="Logo"
@@ -28,13 +30,14 @@ const Navbar = () => {
                   window.location.href = "https://www.satoshipunks.art/";
                 }}
               />
-              <img
+              <Image
                 src={logoType}
                 className="ml-2.5 cursor-pointer"
                 onClick={() => {
                   window.location.href = "https://www.satoshipunks.art/";
                 }}
-              ></img>
+                alt="Logo type"
+              />
               {/* <div
               className="text-2xl px-2 ml-8 cursor-pointer select-none w-auto h-auto hidden md:block"
               onClick={() => {
@@ -47,7 +50,7 @@ const Navbar = () => {
             <div className="hidden md:block">
               <div className="flex items-center gap-8">
                 <div className="flex flex-row">
-                  <img
+                  <Image
                     src={twitterIcon}
                     className="m-2.5 cursor-pointer"
                     alt="Twitter icon"
@@ -58,7 +61,7 @@ const Navbar = () => {
                       );
                     }}
                   />
-                  <img
+                  <Image
                     src={discordIcon}
                     className="m-2.5 cursor-pointer"
                     alt="Discord icon"
@@ -70,12 +73,12 @@ const Navbar = () => {
                     }}
                   />
                 </div>
-                {/* <button
+                <button
                   className="text-base rounded-lg bg-darkerLightGray border-lightGray hover:bg-defaultGray hover:border-lightGray"
                   onClick={toggleConnectWallet}
                 >
                   Connect Wallet
-                </button> */}
+                </button>
               </div>
             </div>
           </div>

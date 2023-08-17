@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import raffle from "../../raffleDetails.json";
 import moment from "moment";
 
-import MetamaskImg from "../assets/metamask.svg";
-import OkxImg from "../assets/okx.png";
-import BitcoinImg from "../assets/bitcoin.png";
-import EthereumImg from "../assets/ethereum.png";
-import CloseImg from "../assets/close.svg";
+import Image from "next/image";
+
+import MetamaskImg from "../../public/metamask.svg";
+import OkxImg from "../../public/okx.png";
+import BitcoinImg from "../../public/bitcoin.png";
+import EthereumImg from "../../public/ethereum.png";
+import CloseImg from "../../public/close.svg";
+
+import { getAddress, signTransaction } from "sats-connect";
 
 export default function ConnectWallet({ onClose }) {
   return (
@@ -23,25 +27,25 @@ export default function ConnectWallet({ onClose }) {
               <h2 className="text-2xl font-semibold">
                 Connect a wallet to continue
               </h2>
-              <img
+              <Image
                 src={CloseImg}
                 className="cursor-pointer ml-6"
                 onClick={onClose}
-              ></img>
+              />
             </div>
             <div className="flex justify-between items-center">
               <span className="text-base">
-                Choose how you want to connect. If you don't have a wallet, you
-                can select a provider and create one.
+                {`Choose how you want to connect. If you don't have a wallet, you
+                can select a provider and create one.`}
               </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-base text-opacity-20 break-normal text-[#808080]">
-                Using Hiro and Xverse wallets simultaneously causes issues with
+                {`Using Hiro and Xverse wallets simultaneously causes issues with
                 signing transactions and may lead to unexpected behavior. For a
                 safe experience, disconnect from ME website and disable one of
                 the wallets on your browser, as they interfere with each other's
-                functions in the browser.
+                functions in the browser.`}
               </span>
             </div>
             <div className="flex flex-col justify-between items-center">
@@ -50,10 +54,12 @@ export default function ConnectWallet({ onClose }) {
                 onClick={handleXverseWalletClick}
               >
                 <div className="flex items-center">
-                  <img
+                  <Image
                     src="https://ord.cdn.magiceden.dev/static_resources/btc-xverse-logo.png"
                     alt="Xverse icon"
                     className="mr-3 rounded-lg w-8 h-8"
+                    width="32"
+                    height="32"
                   />
                   <div className="flex flex-col">
                     <span>Xverse</span>
@@ -84,10 +90,12 @@ export default function ConnectWallet({ onClose }) {
                 onClick={handleUnisatWalletClick}
               >
                 <div className="flex items-center">
-                  <img
+                  <Image
                     src="https://creator-hub-prod.s3.us-east-2.amazonaws.com/dsadsadsadas_pfp_1678648465423.png"
                     alt="Unisat icon"
                     className="mr-3 rounded-lg w-8 h-8"
+                    width="32"
+                    height="32"
                   />
                   <div className="flex flex-col">
                     <span>Unisat</span>
@@ -118,7 +126,7 @@ export default function ConnectWallet({ onClose }) {
                 onClick={handleHiroWalletClick}
               >
                 <div className="flex items-center">
-                  <img
+                  <Image
                     src="https://creator-hub-prod.s3.us-east-2.amazonaws.com/dsasdadsadsadsadsa_pfp_1678238217021.jpeg"
                     alt="Hiro icon"
                     className="mr-3 rounded-lg"
@@ -165,18 +173,32 @@ export default function ConnectWallet({ onClose }) {
 
   async function handleXverseWalletClick() {
     if (window.BitcoinProvider) {
-      const userAddresses = await window.BitcoinProvider.connect(
-        "getAddresses"
-      );
-      console.log(userAddresses);
+      const getAddressOptions = {
+        payload: {
+          purposes: ["ordinals", "payment"],
+          message: "Address for receiving Ordinals and payments",
+          network: {
+            type: "Mainnet",
+          },
+        },
+        onFinish: (response) => {
+          console.log(response);
+        },
+        onCancel: () => alert("Request canceled"),
+      };
+
+      await getAddress(getAddressOptions);
     }
   }
 
   async function handleUnisatWalletClick() {
     if (window.unisat) {
-      const userAddresses = await window.unisat?.requestAccounts();
-      const userAddress = userAddresses[0];
-      console.log(userAddress);
+      unisat.requestAccounts().then((accounts) => {
+        console.log(accounts[0]);
+      });
+      // const userAddresses = await window.unisat?.requestAccounts();
+      // const userAddress = userAddresses[0];
+      // console.log(userAddress);
     }
   }
 }

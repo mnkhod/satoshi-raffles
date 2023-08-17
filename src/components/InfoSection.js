@@ -18,10 +18,11 @@ export default function InfoSection() {
           </p>
           <br />
           <p className="text-base text-justify">
+            {`
             Once the countdown ends, a draw will be made in Satoshi Punks
             Discord server and the Inscription will be sent to the winner. After
             the raffle, all gathered PSAT will be burnt by being sent to Satoshi
-            Nakamoto's address. Therefore, deposits are non-refundable.
+            Nakamoto's address. Therefore, deposits are non-refundable.`}
           </p>
         </div>
       </div>

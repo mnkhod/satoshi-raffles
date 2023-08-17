@@ -1,21 +1,19 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 
-import InscriptionDetails from "./components/InscriptionDetails";
-import ViewInscription from "./components/ViewInscription";
-import BuyPanel from "./components/BuyPanel";
-import Leaderboard from "./components/Leaderboard";
-import InfoSection from "./components/InfoSection";
+import InscriptionDetails from "../components/InscriptionDetails";
+import ViewInscription from "../components/ViewInscription";
+import BuyPanel from "../components/BuyPanel";
+import Leaderboard from "../components/Leaderboard";
+import InfoSection from "../components/InfoSection";
 
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
-import raffle from "../raffleDetails.json";
+import raffle from "../../raffleDetails.json";
 
 function App() {
   const [tokens, setTokens] = useState([]);
-  const apiKey = import.meta.env.VITE_OKLINK_API_KEY;
 
   useEffect(() => {
     getAddressDetail();
@@ -26,7 +24,7 @@ function App() {
       let response = await axios({
         method: "get",
         headers: {
-          "OK-ACCESS-KEY": apiKey,
+          "OK-ACCESS-KEY": process.env.OKLINK_API_KEY,
         },
         url: `https://www.oklink.com/api/v5/explorer/btc/transaction-list?toAddress=${raffle.userAddress}&limit=0&token=${raffle.tokenTicker}`,
       });
@@ -114,7 +112,6 @@ function App() {
 
   return (
     <>
-      <Navbar />
       <div className="max-w-[1400px] mx-auto">
         <div className="py-[48px] md:py-[64px] px-4 md:px-[40px] w-full grid grid-cols-1 gap-8 justify-start items-center">
           <div className="flex md:flex-row flex-col gap-9">
