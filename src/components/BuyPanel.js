@@ -1,11 +1,35 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import moment from "moment";
+import Image from "next/image";
+
+import { setTicketAmount } from "../slices/mainSlice";
+
 import raffle from "../../raffleDetails.json";
 import CountdownTimer from "./CountdownTimer";
-import CopyDepositAddressButton from "./CopyDepositAddressButton";
-import moment from "moment";
+import PurchaseOverlay from "./PurchaseOverlay";
+
+import { AiOutlineCopy } from "react-icons/ai";
 
 export default function BuyPanel({ tokens }) {
-  const [buyTicketAmount, setBuyTicketAmount] = useState(1);
+  const ticket = useSelector((state) => state.ticket);
+  const dispatch = useDispatch();
+
+  const handleInputChange = (e) => {
+    const newAmount = parseInt(e.target.value, 10);
+    dispatch(setTicketAmount(newAmount));
+  };
+
+  const handleIncrement = () => {
+    const newAmount = Math.min(ticket.amount + 1, raffle.maxTicketAmount);
+    dispatch(setTicketAmount(newAmount));
+  };
+
+  const handleDecrement = () => {
+    const newAmount = Math.max(ticket.amount - 1, 1);
+    dispatch(setTicketAmount(newAmount));
+  };
+
   const [raffleActive, setRaffleActive] = useState(false);
 
   useEffect(() => {
@@ -15,6 +39,20 @@ export default function BuyPanel({ tokens }) {
       setRaffleActive(true);
     }
   }, []);
+
+  const handleCopyDepositAddressButton = () => {
+    navigator.clipboard.writeText(raffle.userAddress);
+  };
+
+  const [isPurchaseOverlayOpen, setIsPurchaseOverlayOpen] = useState(false);
+
+  const handleOpenPurchaseOverlay = () => {
+    setIsPurchaseOverlayOpen(true);
+  };
+
+  const handleClosePurchaseOverlay = () => {
+    setIsPurchaseOverlayOpen(false);
+  };
 
   const renderBuyPanel = () => (
     <>
@@ -41,12 +79,8 @@ export default function BuyPanel({ tokens }) {
               <div className="flex items-center px-5 py-2 rounded-lg text-lg border border-lightGray bg-darkGray peer focus-within:border-[#D6D6D6]">
                 <div className="w-full flex justify-between px-6 md:px-0">
                   <button
-                    className="text-3xl p-0 text-white rounded-r-none bg-inherit border-none"
-                    onClick={() =>
-                      setBuyTicketAmount((prevAmount) =>
-                        Math.max(prevAmount - 1, raffle.minTicketAmount)
-                      )
-                    }
+                    className="text-3xl p-0 text-white rounded-r-none bg-inherit border-none select-none"
+                    onClick={handleDecrement}
                   >
                     -
                   </button>
@@ -56,17 +90,13 @@ export default function BuyPanel({ tokens }) {
                     min="1"
                     readOnly
                     max="1000"
-                    value={buyTicketAmount}
+                    value={ticket.amount}
                     placeholder="1"
-                    onChange={(e) => setBuyTicketAmount(e.target.value)}
+                    onChange={(e) => handleInputChange(e)}
                   />
                   <button
-                    className="text-3xl p-0 text-white rounded-r rounded-l-none bg-inherit border-none"
-                    onClick={() =>
-                      setBuyTicketAmount((prevAmount) =>
-                        Math.min(prevAmount + 1, raffle.maxTicketAmount)
-                      )
-                    }
+                    className="text-3xl p-0 text-white rounded-r rounded-l-none bg-inherit border-none select-none"
+                    onClick={handleIncrement}
                   >
                     +
                   </button>
@@ -75,19 +105,36 @@ export default function BuyPanel({ tokens }) {
               <div className="pt-6 pb-6 md:pb-0">
                 <p className="text-base pb-2">Total cost</p>
                 <h2 className="text-3xl">
-                  {buyTicketAmount * raffle.ticketPrice} {raffle.tokenTicker}
+                  {ticket.amount * raffle.ticketPrice} {raffle.tokenTicker}
                 </h2>
               </div>
             </div>
           </div>
         </div>
         {raffleActive && (
-          <div>
-            <p className="text-base text-lighterGray pb-2">Deposit Address</p>
+          <div className="flex flex-col">
+            <div className="flex flex-row text-base text-lighterGray pb-2">
+              Deposit Address
+              <div
+                className="flex pl-2 items-center"
+                onClick={handleCopyDepositAddressButton}
+              >
+                <AiOutlineCopy />
+              </div>
+            </div>
             <p className="w-full select-all text-base bg-defaultGray break-all inline-block text-start pb-6">
               {raffle.userAddress}
             </p>
-            <CopyDepositAddressButton />
+            <button
+              className="text-base bg-defaultGray border-lightGray px-[16px] py-[12px] h-[48px] w-full md:w-auto hover:bg-darkerLightGray hover:border-lightGray"
+              onClick={handleOpenPurchaseOverlay}
+            >
+              Purchase
+            </button>
+            <PurchaseOverlay
+              isOpen={isPurchaseOverlayOpen}
+              onClose={handleClosePurchaseOverlay}
+            />
           </div>
         )}
       </div>

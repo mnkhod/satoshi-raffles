@@ -1,18 +1,27 @@
 import { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import raffle from "../../raffleDetails.json";
 import moment from "moment";
 
 import Image from "next/image";
 
-import MetamaskImg from "../../public/metamask.svg";
-import OkxImg from "../../public/okx.png";
-import BitcoinImg from "../../public/bitcoin.png";
-import EthereumImg from "../../public/ethereum.png";
+import {
+  setConnected,
+  setAddress,
+  setAddresses,
+  setNetwork,
+  setInscriptions,
+} from "../slices/mainSlice";
+
 import CloseImg from "../../public/close.svg";
 
 import { getAddress, signTransaction } from "sats-connect";
 
-export default function ConnectWallet({ onClose, handleConnect }) {
+export default function ConnectWallet({ onClose }) {
+  const account = useSelector((state) => state.account);
+  const dispatch = useDispatch();
+
   return (
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50"></div>
@@ -195,8 +204,14 @@ export default function ConnectWallet({ onClose, handleConnect }) {
   async function handleUnisatWalletClick() {
     if (window.unisat) {
       unisat.requestAccounts().then((accounts) => {
-        handleConnect(accounts[0]);
-        onClose();
+        console.log(accounts);
+        dispatch(setConnected(true));
+        dispatch(setAddress(accounts[0]));
+        dispatch(setAddresses(accounts));
+        console.log(account.address);
+        window.localStorage.setItem("connectedAddress", accounts[0]);
+        window.localStorage.setItem("lastSession", moment().valueOf());
+        console.log(window.localStorage);
       });
     } else {
       window.open("https://unisat.io/", "_blank");
