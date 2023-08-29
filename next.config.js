@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     OKLINK_API_KEY: process.env.OKLINK_API_KEY,
+    BESTINSLOT_API_KEY: process.env.BESTINSLOT_API_KEY,
   },
 
   images: {

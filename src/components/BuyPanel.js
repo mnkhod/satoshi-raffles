@@ -116,7 +116,7 @@ export default function BuyPanel({ tokens }) {
             <div className="flex flex-row text-base text-lighterGray pb-2">
               Deposit Address
               <div
-                className="flex pl-2 items-center"
+                className="flex pl-2 items-center cursor-pointer"
                 onClick={handleCopyDepositAddressButton}
               >
                 <AiOutlineCopy />
