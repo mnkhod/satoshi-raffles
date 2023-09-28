@@ -76,7 +76,7 @@ export default function BuyPanel({ tokens }) {
           <div className="flex flex-col w-full md:w-auto">
             <p className="text-base pb-2">Select amount</p>
             <div className="group">
-              <div className="flex items-center px-5 py-2 rounded-lg text-lg border border-lightGray bg-darkGray peer focus-within:border-[#D6D6D6]">
+              <div className="flex items-center px-5 py-2 rounded-lg text-lg border border-lightGray bg-darkGray peer focus-within:border-[#D6D6D6] max-w-full md:max-w-min">
                 <div className="w-full flex justify-between px-6 md:px-0">
                   <button
                     className="text-3xl p-0 text-white rounded-r-none bg-inherit border-none select-none"

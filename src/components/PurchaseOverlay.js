@@ -15,6 +15,8 @@ const PurchaseOverlay = ({ isOpen, onClose }) => {
   const [selectedToken, setSelectedToken] = useState(null);
   const [transferableInscriptions, setTransferableInscriptions] = useState([]);
 
+  const [inscribeAmount, setInscribeAmount] = useState(0);
+
   const account = useSelector((state) => state.account);
   const dispatch = useDispatch();
 
@@ -111,6 +113,21 @@ const PurchaseOverlay = ({ isOpen, onClose }) => {
     getTransferableInscriptions(ticker);
   }
 
+  function handleInscribeAmountChange(e) {
+    setInscribeAmount(e.target.value);
+  }
+
+  async function handleInscribeButtonClick() {
+    try {
+      const tx = await window.unisat.inscribeTransfer(
+        selectedToken,
+        inscribeAmount
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function transferInscription(inscriptionId) {
     try {
       let { txid } = await window.unisat.sendInscription(
@@ -126,7 +143,7 @@ const PurchaseOverlay = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 overflow-scroll">
+    <div className="fixed inset-0 flex items-center justify-center z-50 overflow-hidden">
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="bg-defaultGray p-4 rounded-lg shadow-md z-10 border border-lightGray">
         <div className="flex justify-between items-center select-none">
@@ -165,6 +182,21 @@ const PurchaseOverlay = ({ isOpen, onClose }) => {
         </div>
         {selectedToken ? (
           <div>
+            <div>
+              <input
+                className="py-3 px-2"
+                type="number"
+                onChange={(e) => {
+                  handleInscribeAmountChange(e);
+                }}
+              ></input>
+              <button
+                className="py-3 px-2"
+                onClick={() => handleInscribeButtonClick()}
+              >
+                Inscribe
+              </button>
+            </div>
             <h2 className="text-lg font-semibold mb-2">
               Transferable {selectedToken}:
             </h2>

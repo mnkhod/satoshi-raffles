@@ -76,6 +76,7 @@ function ConnectWalletButton() {
           expiry: moment().add(1, "days").format(),
         };
         window.localStorage.setItem("details", JSON.stringify(item));
+        setDetails(item);
       } else {
         alert("Signature is not valid");
       }
@@ -110,13 +111,10 @@ function ConnectWalletButton() {
   useEffect(() => {
     try {
       window.unisat.on("accountsChanged", () => {
-        // window.location.reload();
-        console.log("accountsChanged");
-      });
-
-      window.unisat.on("networkChanged", () => {
-        // window.location.reload();
-        console.log("networkChanged");
+        dispatch(setAddress(""));
+        dispatch(setConnected(false));
+        window.localStorage.removeItem("details");
+        window.location.reload();
       });
     } catch (error) {
       console.log(error);
@@ -145,17 +143,11 @@ function ConnectWalletButton() {
 
   async function handleProfileClick() {
     window.open(`/profile/${account.address}`, "_blank");
-    // try {
-    //   let res = await window.unisat.getInscriptions();
-    //   console.log(res);
-    // } catch (e) {
-    //   console.log(e);
-    // }
   }
 
   return (
     <div>
-      {account.connected ? (
+      {details && account.connected ? (
         <div ref={dropdownRef} className="relative inline-block text-left">
           <button
             className={
@@ -163,9 +155,9 @@ function ConnectWalletButton() {
             }
             onClick={() => setIsOpen(!isOpen)}
           >
-            {account.address?.slice(0, 6) +
+            {details.address?.slice(0, 6) +
               "..." +
-              account.address?.slice(58, 62)}
+              details.address?.slice(58, 62)}
           </button>
           {isOpen && (
             <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">

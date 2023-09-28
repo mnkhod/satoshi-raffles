@@ -30,6 +30,7 @@ export default function Profile() {
 
       if (response.data.msg == "") {
         let inscriptionDatas = response.data.data;
+        console.log(inscriptionDatas);
         let result = [];
 
         if (inscriptionDatas.length == 0) return;
@@ -74,30 +75,30 @@ export default function Profile() {
           ) : (
             <div>
               BRC-20:
-              {inscriptions?.map((inscription, index) => (
-                <div key={index}>
-                  <div className="grid grid-cols-5 gap-4 text-white">
-                    <div className="flex flex-col border border-white p-6">
+              <div className="grid grid-cols-5 gap-4 text-white">
+                {inscriptions?.map((inscription, index) => (
+                  <div key={index}>
+                    <button className="flex flex-col border border-white p-6">
                       <div className="flex justify-between">
                         <div>{inscription.name}</div>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between text-sm text-lightGray">
                         <div>Transferable: </div>
                         <div>{inscription.transferBalance}</div>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between text-sm text-lightGray">
                         <div>Available: </div>
                         <div>{inscription.availableBalance}</div>
                       </div>
                       <div className="w-full h-0.5 bg-lightGray"></div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between text-sm text-lightGray">
                         <div>Balance: </div>
                         <div>{inscription.balance}</div>
                       </div>
-                    </div>
+                    </button>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
         </div>
