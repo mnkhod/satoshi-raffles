@@ -1,19 +1,19 @@
 {
-  "userAddress": "bc1pesjg2k0n69dxvk0qvkr7c3h4s2jupfrvhkfu0ufk6p2h2zdl2qcq754tf0",
-  "tokenTicker": "PSAT",
-  "ticketPrice": 1000,
-  "minTicketAmount": 1,
-  "maxTicketAmount": 1000,
-  "winner": "",
-  "startTime": "July 24 2023, 00:00:00 GMT+0800",
-  "endTime": "September 20 2023 00:00:00 GMT+0800",
-  "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
-  "prize": {
-    "name": "Uncommon Guys #075",
-    "description": "Uncommon Guys are PFP collection inscribed on uncommon sats All 1/1 design, so we inscribed the 1/1 Satoshi Punk with Uncommon sats.",
-    "id": "14bf27618b9b0489d7894a0407066ac3cd9ae3162adcc150dc8b549cbbcc0448i0",
-    "number": 14493587,
-    "rarity": "Uncommon",
-    "satributes": ["Uncommon"]
-  }
+    "userAddress": "bc1pesjg2k0n69dxvk0qvkr7c3h4s2jupfrvhkfu0ufk6p2h2zdl2qcq754tf0",
+    "tokenTicker": "PSAT",
+    "ticketPrice": 1000,
+    "minTicketAmount": 1,
+    "maxTicketAmount": 1000,
+    "winner": "",
+    "startTime": "July 24 2023, 00:00:00 GMT+0800",
+    "endTime": "September 30 2023 00:00:00 GMT+0800",
+    "timeFormat": "MMMM DD YYYY HH:mm:ss Z",
+    "prize": {
+        "name": "Uncommon Guys #075",
+        "description": "Uncommon Guys are PFP collection inscribed on uncommon sats All 1/1 design, so we inscribed the 1/1 Satoshi Punk with Uncommon sats.",
+        "id": "14bf27618b9b0489d7894a0407066ac3cd9ae3162adcc150dc8b549cbbcc0448i0",
+        "number": 14493587,
+        "rarity": "Uncommon",
+        "satributes": ["Uncommon"]
+    }
 }

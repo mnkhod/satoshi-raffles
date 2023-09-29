@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
+import discordIcon from "../../public/discordIcon.svg";
 import logoType from "../../public/logoType.svg";
 import transparentLogo from "../../public/transparentLogo.png";
 import twitterIcon from "../../public/twitterIcon.svg";
-import discordIcon from "../../public/discordIcon.svg";
 
 import ConnectWalletButton from "./ConnectWalletButton";
 
@@ -14,7 +13,7 @@ export default function Navbar() {
       <nav className="bg-[#000000] bg-opacity-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 px-8">
-            <div className="flex items-center h-12">
+            <div className="flex items-center h-12 select-none">
               <Image
                 className="h-8 w-8 cursor-pointer"
                 src={transparentLogo}
